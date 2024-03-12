@@ -3,7 +3,7 @@ function Home3(){
         <section class="work-section">
 <div class="container">
 <div class="row">
-<div class="col-lg-4 col-md-12 work-img-info aos" data-aos="fade-up"/>
+<div class="col-lg-4 col-md-12 work-img-info aos" data-aos="fade-up">
 <div class="work-img">
 <img src="assets/img/work-img.png" class="img-fluid" alt="doctor-image"/>
 </div>
@@ -55,6 +55,7 @@ function Home3(){
 <div class="work-content">
 <h5>Get Your Solution</h5>
 <p>Lorem ipsum dolor consectetur adipiscing elit, tempor incididunt labore dolore magna aliqua.</p>
+</div>
 </div>
 </div>
 </div>

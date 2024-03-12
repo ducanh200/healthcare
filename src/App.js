@@ -11,6 +11,7 @@ import Home5 from './components/pages/home5';
 import Home6 from './components/pages/home6';
 import Home7 from './components/pages/home7';
 import Home8 from './components/pages/home8';
+import Home25 from './components/pages/home25';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Home></Home>
         <Home1></Home1>
         <Home2></Home2>
+        <Home25></Home25>
         <Home3></Home3>
         <Home4></Home4>
         <Home5></Home5>
