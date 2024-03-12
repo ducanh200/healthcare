@@ -5,6 +5,12 @@ import Footer from './components/layouts/footer';
 import Home from './components/pages/home';
 import Home1 from './components/pages/home1';
 import Home2 from './components/pages/home2';
+import Home3 from './components/pages/home3';
+import Home4 from './components/pages/home4';
+import Home5 from './components/pages/home5';
+import Home6 from './components/pages/home6';
+import Home7 from './components/pages/home7';
+import Home8 from './components/pages/home8';
 
 function App() {
   return (
@@ -14,6 +20,12 @@ function App() {
         <Home></Home>
         <Home1></Home1>
         <Home2></Home2>
+        <Home3></Home3>
+        <Home4></Home4>
+        <Home5></Home5>
+        <Home6></Home6>
+        <Home7></Home7>
+        <Home8></Home8>
         <Footer></Footer>
       <div class="mouse-cursor cursor-outer"></div>
 <div class="mouse-cursor cursor-inner"></div>
