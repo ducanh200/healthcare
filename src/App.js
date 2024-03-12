@@ -2,32 +2,27 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/layouts/header';
 import Footer from './components/layouts/footer';
-import Home from './components/pages/home';
-import Home1 from './components/pages/home1';
-import Home2 from './components/pages/home2';
-import Home3 from './components/pages/home3';
-import Home4 from './components/pages/home4';
-import Home5 from './components/pages/home5';
-import Home6 from './components/pages/home6';
-import Home7 from './components/pages/home7';
-import Home8 from './components/pages/home8';
-import Home25 from './components/pages/home25';
+import Home from './components/pages/home/home';
+import Home1 from './components/pages/home/home1';
+import Home2 from './components/pages/home/home2';
+import Home3 from './components/pages/home/home3';
+import Home4 from './components/pages/home/home4';
+import Home5 from './components/pages/home/home5';
+import Home6 from './components/pages/home/home6';
+import Home7 from './components/pages/home/home7';
+import Home8 from './components/pages/home/home8';
+import Home25 from './components/pages/home/home25';
+import Index from './components/pages/home';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <div class="main-wrapper">
         <Header></Header>
-        <Home></Home>
-        <Home1></Home1>
-        <Home2></Home2>
-        <Home25></Home25>
-        <Home3></Home3>
-        <Home4></Home4>
-        <Home5></Home5>
-        <Home6></Home6>
-        <Home7></Home7>
-        <Home8></Home8>
+        <Routes>
+          <Route path='/' element={<Index/>}/>
+        </Routes>
         <Footer></Footer>
       <div class="mouse-cursor cursor-outer"></div>
 <div class="mouse-cursor cursor-inner"></div>
