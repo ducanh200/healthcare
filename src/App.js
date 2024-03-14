@@ -2,15 +2,22 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/layouts/header';
 import Footer from './components/layouts/footer';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './components/pages/home';
 import Booking from './components/pages/booking';
+import BreadCrumb from './components/layouts/breadcrumb';
 
 function App() {
+  const location = useLocation();
+
+  const isHomeRoute = () => {
+    return location.pathname === '/';
+  };
   return (
     <div className="App">
       <div class="main-wrapper">
         <Header></Header>
+        {!isHomeRoute() && <BreadCrumb />}
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<Booking/>}/>

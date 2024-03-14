@@ -1,4 +1,24 @@
+import { useState } from "react";
+
 function Booking(){
+    const [selectedTime, setSelectedTime] = useState("10:00 AM"); // Default selected time
+
+    const handleTimeClick = (time) => {
+        // Deselect the previously selected time
+        const timeSlots = document.querySelectorAll('.time-slot a.timing');
+        timeSlots.forEach(slot => {
+          if (slot.textContent.trim() === selectedTime) {
+            slot.classList.remove('selected');
+          }
+        });
+        setSelectedTime(time);
+    
+    // Add the "selected" class to the clicked time slot
+    const selectedSlot = document.querySelector(`.time-slot a.timing span:first-child[data-time="${time}"]`);
+    if (selectedSlot) {
+      selectedSlot.parentNode.classList.add('selected');
+    }
+  };
     return(
         <div class="content">
 <div class="container">
@@ -100,81 +120,81 @@ function Booking(){
 <div class="time-slot">
 <ul class="clearfix">
 <li>
-<a class="timing" href="#">
-<span>9:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>10:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>11:00</span> <span>AM</span>
-</a>
+            <a className={selectedTime === "9:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("9:00 AM")}>
+              <span data-time="9:00">9:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "10:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("10:00 AM")}>
+              <span data-time="10:00">10:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "11:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("11:00 AM")}>
+              <span data-time="11:00">11:00</span> <span>AM</span>
+            </a>
 </li>
 <li>
-<a class="timing" href="#">
-<span>9:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>10:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>11:00</span> <span>AM</span>
-</a>
+            <a className={selectedTime === "9:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("9:00 AM")}>
+              <span data-time="9:00">9:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "10:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("10:00 AM")}>
+              <span data-time="10:00">10:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "11:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("11:00 AM")}>
+              <span data-time="11:00">11:00</span> <span>AM</span>
+            </a>
 </li>
 <li>
-<a class="timing" href="#">
-<span>9:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>10:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>11:00</span> <span>AM</span>
-</a>
+            <a className={selectedTime === "9:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("9:00 AM")}>
+              <span data-time="9:00">9:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "10:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("10:00 AM")}>
+              <span data-time="10:00">10:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "11:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("11:00 AM")}>
+              <span data-time="11:00">11:00</span> <span>AM</span>
+            </a>
 </li>
 <li>
-<a class="timing" href="#">
-<span>9:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>10:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>11:00</span> <span>AM</span>
-</a>
+            <a className={selectedTime === "9:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("9:00 AM")}>
+              <span data-time="9:00">9:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "10:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("10:00 AM")}>
+              <span data-time="10:00">10:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "11:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("11:00 AM")}>
+              <span data-time="11:00">11:00</span> <span>AM</span>
+            </a>
 </li>
 <li>
-<a class="timing" href="#">
-<span>9:00</span> <span>AM</span>
-</a>
-<a class="timing selected" href="#">
-<span>10:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>11:00</span> <span>AM</span>
-</a>
+            <a className={selectedTime === "9:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("9:00 AM")}>
+              <span data-time="9:00">9:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "10:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("10:00 AM")}>
+              <span data-time="10:00">10:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "11:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("11:00 AM")}>
+              <span data-time="11:00">11:00</span> <span>AM</span>
+            </a>
 </li>
 <li>
-<a class="timing" href="#">
-<span>9:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>10:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>11:00</span> <span>AM</span>
-</a>
+            <a className={selectedTime === "9:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("9:00 AM")}>
+              <span data-time="9:00">9:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "10:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("10:00 AM")}>
+              <span data-time="10:00">10:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "11:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("11:00 AM")}>
+              <span data-time="11:00">11:00</span> <span>AM</span>
+            </a>
 </li>
 <li>
-<a class="timing" href="#">
-<span>9:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>10:00</span> <span>AM</span>
-</a>
-<a class="timing" href="#">
-<span>11:00</span> <span>AM</span>
-</a>
+            <a className={selectedTime === "9:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("9:00 AM")}>
+              <span data-time="9:00">9:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "10:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("10:00 AM")}>
+              <span data-time="10:00">10:00</span> <span>AM</span>
+            </a>
+            <a className={selectedTime === "11:00 AM" ? "timing selected" : "timing"} href="#" onClick={() => handleTimeClick("11:00 AM")}>
+              <span data-time="11:00">11:00</span> <span>AM</span>
+            </a>
 </li>
 </ul>
 </div>
