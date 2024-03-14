@@ -4,6 +4,7 @@ import Header from './components/layouts/header';
 import Footer from './components/layouts/footer';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/pages/home';
+import Booking from './components/pages/booking';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/booking' element={<Booking/>}/>
         </Routes>
         <Footer></Footer>
       <div class="mouse-cursor cursor-outer"></div>
