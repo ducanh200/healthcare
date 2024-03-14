@@ -2,18 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/layouts/header';
 import Footer from './components/layouts/footer';
-import Home from './components/pages/home/home';
-import Home1 from './components/pages/home/home1';
-import Home2 from './components/pages/home/home2';
-import Home3 from './components/pages/home/home3';
-import Home4 from './components/pages/home/home4';
-import Home5 from './components/pages/home/home5';
-import Home6 from './components/pages/home/home6';
-import Home7 from './components/pages/home/home7';
-import Home8 from './components/pages/home/home8';
-import Home25 from './components/pages/home/home25';
-import Index from './components/pages/home';
 import { Route, Routes } from 'react-router-dom';
+import Home from './components/pages/home';
 
 function App() {
   return (
@@ -21,7 +11,7 @@ function App() {
       <div class="main-wrapper">
         <Header></Header>
         <Routes>
-          <Route path='/' element={<Index/>}/>
+          <Route path='/' element={<Home/>}/>
         </Routes>
         <Footer></Footer>
       <div class="mouse-cursor cursor-outer"></div>
