@@ -6,12 +6,13 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './components/pages/home';
 import Booking from './components/pages/booking';
 import BreadCrumb from './components/layouts/breadcrumb';
+import BookingSuccess from './components/pages/booking-success';
 
 function App() {
   const location = useLocation();
 
   const isHomeRoute = () => {
-    return location.pathname === '/';
+    return location.pathname === '/', '/bookingsuccess';
   };
   return (
     <div className="App">
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<Booking/>}/>
+          <Route path='/bookingsuccess' element={<BookingSuccess/>} />
         </Routes>
         <Footer></Footer>
       <div class="mouse-cursor cursor-outer"></div>
