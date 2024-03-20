@@ -8,16 +8,12 @@ import BreadCrumb from './components/layouts/breadcrumb';
 
 import Home from './components/pages/home';
 import Booking from './components/pages/booking';
-import Cart from './components/pages/cart';
-import Error404 from './components/pages/error404';
-import Product_description from './components/pages/product_description';
-import Blog_details from './components/pages/blog_details';
 
 function App() {
   const location = useLocation();
 
   const isHomeRoute = () => {
-    return location.pathname === '/';
+    return location.pathname === '/', '/bookingsuccess';
   };
   return (
     <div className="App">
@@ -27,10 +23,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<Booking/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-          <Route path='/404' element={<Error404/>}/>
-          <Route path='/product_description' element={<Product_description/>}/>
-          <Route path='/blog_details' element={<Blog_details/>}/>
         </Routes>
         <Footer></Footer>
         <div class="mouse-cursor cursor-outer"></div>
