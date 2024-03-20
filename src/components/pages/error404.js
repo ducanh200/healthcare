@@ -10,7 +10,7 @@ function Error404(){
                                 <div class="error-content error-404-content">
                                     <h2>Oops! That Page Can’t Be Found.</h2>
                                     <p>The page you are looking for was never existed.</p>
-                                    <a href="index.html" class="btn btn-primary prime-btn">Back to Home</a>
+                                    <a href="/" class="btn btn-primary prime-btn">Back to Home</a>
                                 </div>
                             </div>
                         </div>

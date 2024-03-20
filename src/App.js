@@ -16,14 +16,14 @@ import Product_description from './components/pages/product_description'
 function App() {
   const location = useLocation();
 
-  const isHomeRoute = () => {
-    return location.pathname === '/', '/bookingsuccess';
-  };
+  // const isHomeRoute = () => {
+  //   return location.pathname === '/', '/bookingsuccess';
+  // };
   return (
     <div className="App">
       <div class="main-wrapper">
         <Header></Header>
-        {!isHomeRoute() && <BreadCrumb />}
+        <BreadCrumb currentLocation={location.pathname} />
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<Booking/>}/>

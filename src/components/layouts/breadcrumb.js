@@ -1,20 +1,46 @@
-function BreadCrumb(){
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+
+function BreadCrumb({ currentLocation }){
+
+    const location = useLocation();
+
+    const isHomePage = location.pathname === '/' || location.pathname === '/404'; 
+
+    let breadcrumbName = 'Default';
+
+    switch (currentLocation) {
+        case '/cart':
+          breadcrumbName = 'Prescription details';
+          break;
+        case '/blog_details':
+          breadcrumbName = 'Blog Details';
+          break;
+        case '/product_description':
+          breadcrumbName = 'Product Description';
+          break;
+    }
+
     return(
-        <div class="breadcrumb-bar-two">
-            <div class="container">
-                <div class="row align-items-center inner-banner">
-                    <div class="col-md-12 col-12 text-center">
-                        <h2 class="breadcrumb-title">Booking</h2>
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Booking</li>
-                            </ol>
-                        </nav>
+        <section className={`${isHomePage ? 'hide' : 'show'}`}>
+            {!isHomePage && (
+                <div class="breadcrumb-bar-two">
+                    <div class="container">
+                        <div class="row align-items-center inner-banner">
+                            <div class="col-md-12 col-12 text-center">
+                                <h2 class="breadcrumb-title">{breadcrumbName}</h2>
+                                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item" aria-current="page">{breadcrumbName}</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            )}
+        </section>
     )
 }
 
