@@ -64,7 +64,7 @@ function Home(){
             </section>
             <Home_department></Home_department>
             <section class="doctors-section">
-                <div class="container">
+                <div class="container" style={{textAlign: "justify"}}>
                     <div class="row">
                         <div class="col-md-12 aos" data-aos="fade-up">
                             <div class="section-header-one text-center">
@@ -227,7 +227,7 @@ function Home(){
                 </div>
             </section>
             <section class="pricing-section">
-                <div class="container">
+                <div class="container" style={{textAlign: "justify"}}>
                     <div class="row">
                         <div class="col-md-12 text-center aos" data-aos="fade-up">
                             <div class="section-header-one">
@@ -357,7 +357,7 @@ function Home(){
                 </div>
             </section>
             <section class="work-section">
-                <div class="container">
+                <div class="container" style={{textAlign: "justify"}}>
                     <div class="row">
                         <div class="col-lg-4 col-md-12 work-img-info aos" data-aos="fade-up">
                             <div class="work-img">
@@ -420,7 +420,7 @@ function Home(){
                 </div>
             </section>
             <section class="articles-section">
-                <div class="container">
+                <div class="container" style={{textAlign: "justify"}}>
                     <div class="row">
                         <div class="col-md-12 aos" data-aos="fade-up">
                             <div class="section-header-one text-center">
@@ -553,7 +553,7 @@ function Home(){
                 </div>
             </section>
             <section class="app-section">
-                <div class="container">
+                <div class="container" style={{textAlign: "justify"}}>
                     <div class="app-bg">
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-12">
@@ -582,7 +582,7 @@ function Home(){
                 </div>
             </section>
             <section class="faq-section">
-                <div class="container">
+                <div class="container" style={{textAlign: "justify"}}>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="section-header-one text-center aos" data-aos="fade-up">
@@ -611,11 +611,11 @@ function Home(){
                                 <div class="accordion" id="faq-details">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
-                                            <a href="javascript:void(0);" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <a href="javascript:void(0);" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                                 Can I make an Appointment Online with White Plains Hospital Kendi?
                                             </a>
                                         </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faq-details">
+                                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faq-details">
                                             <div class="accordion-body">
                                                 <div class="accordion-content">
                                                     <p>
@@ -626,12 +626,12 @@ function Home(){
                                         </div>
                                     </div>
                                     <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <a href="javascript:void(0);" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <a href="javascript:void(0);" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                                 Can I make an Appointment Online with White Plains Hospital Kendi?
                                             </a>
                                         </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faq-details">
+                                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faq-details">
                                             <div class="accordion-body">
                                                 <div class="accordion-content">
                                                     <p>
@@ -642,12 +642,12 @@ function Home(){
                                         </div>
                                     </div>
                                     <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <a href="javascript:void(0);" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <h2 class="accordion-header" id="headingThree">
+                                            <a href="javascript:void(0);" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                 Can I make an Appointment Online with White Plains Hospital Kendi?
                                             </a>
                                         </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faq-details">
+                                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faq-details">
                                             <div class="accordion-body">
                                                 <div class="accordion-content">
                                                     <p>
@@ -658,12 +658,12 @@ function Home(){
                                         </div>
                                     </div>
                                     <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <a href="javascript:void(0);" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <h2 class="accordion-header" id="headingFour">
+                                            <a href="javascript:void(0);" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                                 Can I make an Appointment Online with White Plains Hospital Kendi?
                                             </a>
                                         </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faq-details">
+                                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faq-details">
                                             <div class="accordion-body">
                                                 <div class="accordion-content">
                                                     <p>
@@ -673,13 +673,13 @@ function Home(){
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <a href="javascript:void(0);" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="accordion-item">    
+                                        <h2 class="accordion-header" id="headingFive">
+                                            <a href="javascript:void(0);" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                                 Can I make an Appointment Online with White Plains Hospital Kendi?
                                             </a>
                                         </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faq-details">
+                                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faq-details">
                                             <div class="accordion-body">
                                                 <div class="accordion-content">
                                                     <p>
@@ -696,7 +696,7 @@ function Home(){
                 </div>
             </section>
             <section class="testimonial-section">
-                <div class="container">
+                <div class="container" style={{textAlign: "justify"}}>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="testimonial-slider slick">
@@ -801,7 +801,7 @@ function Home(){
                 </div>
             </section>
             <section class="partners-section">
-                <div class="container">
+                <div class="container" style={{textAlign: "justify"}}>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="section-header-one text-center aos" data-aos="fade-up">
