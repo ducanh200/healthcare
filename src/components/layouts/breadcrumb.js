@@ -19,6 +19,20 @@ function BreadCrumb({ currentLocation }){
         case '/product_description':
           breadcrumbName = 'Product Description';
           break;
+          case '/contact':
+          breadcrumbName = 'Contact Us';
+          break;
+          case '/aboutus':
+          breadcrumbName = 'About Us';
+          break;
+          case '/invoice':
+          breadcrumbName = 'Invoice';
+          break;
+          case '/detailinvoice':
+          breadcrumbName = 'Invoice View';
+          break;
+          
+
     }
 
     return(

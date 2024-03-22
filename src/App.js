@@ -12,6 +12,10 @@ import Cart from './components/pages/cart';
 import Error404 from './components/pages/error404'
 import Blog_details from './components/pages/blog_details'
 import Product_description from './components/pages/product_description'
+import Contact from './components/pages/contact';
+import AboutUs from './components/pages/about';
+import Invoice from './components/pages/invoice';
+import DetailInvoice from './components/pages/detailinvoice';
 
 function App() {
   const location = useLocation();
@@ -31,6 +35,12 @@ function App() {
           <Route path='/404' element={<Error404/>}/>
           <Route path='/blog_details' element={<Blog_details/>}/>
           <Route path='/product_description' element={<Product_description/>}/>
+          <Route path='/contact' element={<Contact/>}/>
+          <Route path='/aboutus' element={<AboutUs/>}/>
+          <Route path='/invoice' element={<Invoice/>}/>
+          <Route path='/detailinvoice' element={<DetailInvoice/>}/>
+         
+      
 
         </Routes>
         <Footer></Footer>
