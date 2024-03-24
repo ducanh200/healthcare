@@ -17,6 +17,7 @@ import AboutUs from './components/pages/about';
 import Invoice from './components/pages/invoice';
 import DetailInvoice from './components/pages/detailinvoice';
 import Department from './components/pages/department';
+import Login from './components/pages/login';
 
 function App() {
   const location = useLocation();
@@ -41,7 +42,7 @@ function App() {
           <Route path='/invoice' element={<Invoice/>}/>
           <Route path='/detailinvoice' element={<DetailInvoice/>}/>
           <Route path='/department' element={<Department/>}/>
-
+          <Route path='/login' element={<Login/>}/>
          
       
 
