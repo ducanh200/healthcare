@@ -10,7 +10,7 @@ function BreadCrumb({ currentLocation }){
     let breadcrumbName = 'Default';
 
     switch (currentLocation) {
-        case '/cart':
+        case '/prescription_details':
           breadcrumbName = 'Prescription details';
           break;
         case '/blog_details':
