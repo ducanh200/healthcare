@@ -5,7 +5,7 @@ function BreadCrumb({ currentLocation }){
 
     const location = useLocation();
 
-    const isHomePage = location.pathname === '/' || location.pathname === '/404'; 
+    const isHomePage = location.pathname === '/' || location.pathname === '/404' || location.pathname === '/login' || location.pathname === '/register'; 
 
     let breadcrumbName = 'Default';
 
@@ -19,23 +19,21 @@ function BreadCrumb({ currentLocation }){
         case '/product_description':
           breadcrumbName = 'Product Description';
           break;
-          case '/contact':
+        case '/contact':
           breadcrumbName = 'Contact Us';
           break;
-          case '/aboutus':
+        case '/aboutus':
           breadcrumbName = 'About Us';
           break;
-          case '/invoice':
+        case '/invoice':
           breadcrumbName = 'Invoice';
           break;
-          case '/detailinvoice':
+        case '/detailinvoice':
           breadcrumbName = 'Invoice View';
           break;
-          case '/department':
+        case '/department':
           breadcrumbName = 'Departments';
           break;
-          
-
     }
 
     return(
