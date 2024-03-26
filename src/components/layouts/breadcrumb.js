@@ -5,7 +5,7 @@ function BreadCrumb({ currentLocation }){
 
     const location = useLocation();
 
-    const isHomePage = location.pathname === '/' || location.pathname === '/404'; 
+    const isHomePage = location.pathname === '/' || location.pathname === '/404'|| location.pathname === '/login'; 
 
     let breadcrumbName = 'Default';
 
