@@ -1,4 +1,4 @@
-function Cart(){
+function Prescription_details(){
     return(
         <div class="main-wrapper">
             <div class="content">
@@ -204,4 +204,4 @@ function Cart(){
     )
 }
 
-export default Cart;
+export default Prescription_details;

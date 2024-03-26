@@ -8,7 +8,7 @@ import BreadCrumb from './components/layouts/breadcrumb';
 
 import Home from './components/pages/home';
 import Booking from './components/pages/booking';
-import Cart from './components/pages/cart';
+import Prescription_details from './components/pages/prescription_details';
 import Error404 from './components/pages/error404'
 import Blog_details from './components/pages/blog_details'
 import Product_description from './components/pages/product_description'
@@ -18,6 +18,8 @@ import Invoice from './components/pages/invoice';
 import DetailInvoice from './components/pages/detailinvoice';
 import Department from './components/pages/department';
 import Login from './components/pages/login';
+import Register from './components/pages/register';
+
 
 function App() {
   const location = useLocation();
@@ -33,7 +35,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<Booking/>}/>
-          <Route path='/cart' element={<Cart/>}/>
+          <Route path='/prescription_details' element={<Prescription_details/>}/>
           <Route path='/404' element={<Error404/>}/>
           <Route path='/blog_details' element={<Blog_details/>}/>
           <Route path='/product_description' element={<Product_description/>}/>
@@ -43,9 +45,7 @@ function App() {
           <Route path='/detailinvoice' element={<DetailInvoice/>}/>
           <Route path='/department' element={<Department/>}/>
           <Route path='/login' element={<Login/>}/>
-         
-      
-
+          <Route path='/register' element={<Register/>}/>
         </Routes>
         <Footer></Footer>
         <div class="mouse-cursor cursor-outer"></div>
