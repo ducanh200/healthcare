@@ -3,6 +3,12 @@ const url ={
     PATIENT:{
         REGISTER:"/patients",
     },
-    
+    DEPARTMENT:{
+        LIST: "/departments",
+
+    },
+  
+      
+   
 }
 export default url;
