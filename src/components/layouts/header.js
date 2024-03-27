@@ -64,10 +64,10 @@ function Header(){
                     </li>
                     <li class="login-link"><a href="login.html">Login / Signup</a></li>
                     <li class="register-btn">
-                        <a href="register.html" class="btn reg-btn"><i class="feather-user"></i>Register</a>
+                        <a href="register" class="btn reg-btn"><i class="feather-user"></i>Register</a>
                     </li>
                     <li class="register-btn">
-                        <a href="login.html" class="btn btn-primary log-btn"><i class="feather-lock"></i>Login</a>
+                        <a href="login" class="btn btn-primary log-btn"><i class="feather-lock"></i>Login</a>
                     </li>
                     </ul>
                 </div>

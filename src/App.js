@@ -17,8 +17,8 @@ import AboutUs from './components/pages/about';
 import Invoice from './components/pages/invoice';
 import DetailInvoice from './components/pages/detailinvoice';
 import Department from './components/pages/department';
-import Login from './components/pages/login';
-import Register from './components/pages/register';
+import Login from './components/pages/auth/login';
+import Register from './components/pages/auth/register';
 
 
 function App() {
