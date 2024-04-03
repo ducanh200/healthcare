@@ -29,6 +29,12 @@ function App() {
   // };
   return (
     <div className="App">
+      <div id="loader">
+<div class="loader">
+<span></span>
+<span></span>
+</div>
+</div>
       <div class="main-wrapper">
         <Header></Header>
         <BreadCrumb currentLocation={location.pathname} />
