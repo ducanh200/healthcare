@@ -19,6 +19,7 @@ import DetailInvoice from './components/pages/detailinvoice';
 import Department from './components/pages/department';
 import Login from './components/pages/auth/login';
 import Register from './components/pages/auth/register';
+import CheckOut from './components/pages/checkout';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route path='/department' element={<Department/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
+          <Route path='/checkout' element={<CheckOut/>}/>
         </Routes>
         <Footer></Footer>
         <div class="mouse-cursor cursor-outer"></div>

@@ -9,6 +9,9 @@ const url ={
     },
     SHIFT:{
         LIST:"/shifts"
+    },
+    BOOKING:{
+        CREATE:"/bookings"
     }
 }
 export default url;

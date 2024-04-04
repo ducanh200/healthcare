@@ -4,7 +4,6 @@ import url from "../../services/url";
 
 function Booking(){
   const [activeTiming, setActiveTiming] = useState(null);
-
   const handleTimingClick = (timing) => {
     setActiveTiming(timing);
   };
@@ -56,6 +55,19 @@ function Booking(){
   const filterShiftsBySession = (session) => {
     return shifts.filter(shift => shift.session.toLowerCase() === session);
   };
+  const today = new Date(); // Ngày hiện tại
+const selectedDate = new Date(today.getTime() + (activeDay+1) * 24 * 60 * 60 * 1000); // Tính toán ngày được chọn
+
+const handleNextClick = () => {
+  if (!activeTiming) {
+    alert("Please select a time before proceeding.");
+    return; 
+  }
+  // Lưu ngày và thời gian vào localStorage
+  localStorage.setItem("selectedDate", selectedDate.toISOString().split('T')[0]); // Chuyển đổi ngày thành chuỗi YYYY-MM-DD
+  localStorage.setItem("selectedTime", activeTiming);
+  window.location.href = "/checkout";
+};
   const morningShifts = filterShiftsBySession("morning");
   const afternoonShifts = filterShiftsBySession("afternoon");
   const eveningShifts = filterShiftsBySession("evening");
@@ -159,9 +171,9 @@ function Booking(){
       </div>
       </div>
       <div className="booking-btn">
-      <a href="paitent-details.html" className="btn btn-primary prime-btn justify-content-center align-items-center">
-      Next <i className="feather-arrow-right-circle"></i>
-      </a>
+      <button onClick={handleNextClick} className="btn btn-primary prime-btn justify-content-center align-items-center">
+            Next <i className="feather-arrow-right-circle"></i>
+          </button>
       </div>
       </div>
       <div className="col-lg-4 col-md-12">
