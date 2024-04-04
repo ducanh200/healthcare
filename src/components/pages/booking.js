@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import api from "../../services/api";
+import url from "../../services/url";
 
 function Booking(){
   const [activeTiming, setActiveTiming] = useState(null);
@@ -11,12 +13,11 @@ function Booking(){
 
   useEffect(() => {
     const today = new Date(); // Get today's date
-    const futureDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // Calculate future date 10 days from now
 
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     const dates = [];
-    for (let i = 0; i <= 6; i++) {
+    for (let i = 1; i <= 7; i++) {
       const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
       const dayOfWeek = daysOfWeek[date.getDay()];
       const formattedDate = (
@@ -36,6 +37,28 @@ function Booking(){
     setActiveDay(index);
     // Add your logic for handling day click
   };
+  const [shifts, setShifts] = useState([]); // State to store shifts data
+  const fetchShiftsData = async () => {
+    try {
+      const response = await api.get(url.SHIFT.LIST);
+      setShifts(response.data); // Set the shifts data in state
+    } catch (error) {
+      console.error("Error fetching shifts data:", error);
+    }
+  };
+
+  // Fetch shifts data on component mount
+  useEffect(() => {
+    fetchShiftsData();
+  }, []);
+
+  // Filter shifts based on session (morning, afternoon, evening)
+  const filterShiftsBySession = (session) => {
+    return shifts.filter(shift => shift.session.toLowerCase() === session);
+  };
+  const morningShifts = filterShiftsBySession("morning");
+  const afternoonShifts = filterShiftsBySession("afternoon");
+  const eveningShifts = filterShiftsBySession("evening");
     return(
       <div className="content content-space">
       <div className="container">
@@ -62,28 +85,18 @@ function Booking(){
       <h4>Morning</h4>
       <div className="time-slot-list">
       <ul>
-      <li>
-      <a className={`timing ${activeTiming === "09:00 - 09:30" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("09:00 - 09:30")}>
-      <span><i className="feather-clock"></i> 09:00 - 09:30</span>
-      </a>
-      </li>
-      <li>
-      <a className={`timing ${activeTiming === "10:00 - 10:30" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("10:00 - 10:30")}>
-      <span><i className="feather-clock"></i> 10:00 - 10:30</span>
-      </a>
-      </li>
-      <li className="time-slot-open time-slot-morning">
-      <a className={`timing ${activeTiming === "11:00 - 11:30" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("11:00 - 11:30")}>
-      <span><i className="feather-clock"></i> 11:00 - 11:30</span>
-      </a>
-      </li>
-      <li>
+      {morningShifts.map((shift, index) => (
+                    <li key={index} className={morningShifts.length > 3 && index > 2 ? "time-slot-open time-slot-morning" : ""}>
+                      <a
+                        className={`timing ${activeTiming === shift.time ? "active" : ""}`}
+                        href="javascript:void(0);"
+                        onClick={() => handleTimingClick(shift.time)}
+                      >
+                        <span><i className="feather-clock"></i> {shift.time}</span>
+                      </a>
+                    </li>
+                  ))}
+                  <li>
       <div className="load-more-timings load-more-morning">
       <a href="javascript:void(0);">Load More</a>
       </div>
@@ -97,28 +110,18 @@ function Booking(){
       <h4>Afternoon</h4>
       <div className="time-slot-list">
       <ul>
-      <li>
-      <a className={`timing ${activeTiming === "12:00 - 12:30" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("12:00 - 12:30")}>
-      <span><i className="feather-clock"></i> 12:00 - 12:30</span>
-      </a>
-      </li>
-      <li>
-      <a className={`timing ${activeTiming === "01:00 - 01:30" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("01:00 - 01:30")}>
-      <span><i className="feather-clock"></i> 01:00 - 01:30</span>
-      </a>
-      </li>
-      <li className="time-slot-open time-slot-afternoon">
-      <a className={`timing ${activeTiming === "02:30 - 03:00" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("02:30 - 03:00")}>
-      <span><i className="feather-clock"></i> 02:30 - 03:00</span>
-      </a>
-      </li>
-      <li>
+      {afternoonShifts.map((shift, index) => (
+                    <li key={index} className={afternoonShifts.length > 3 && index > 2 ? "time-slot-open time-slot-afternoon" : ""}>
+                      <a
+                        className={`timing ${activeTiming === shift.time ? "active" : ""}`}
+                        href="javascript:void(0);"
+                        onClick={() => handleTimingClick(shift.time)}
+                      >
+                        <span><i className="feather-clock"></i> {shift.time}</span>
+                      </a>
+                    </li>
+                  ))}
+                  <li>
       <div className="load-more-timings load-more-afternoon">
       <a href="javascript:void(0);">Load More</a>
       </div>
@@ -132,28 +135,18 @@ function Booking(){
       <h4>Evening</h4>
       <div className="time-slot-list">
       <ul>
-      <li>
-      <a className={`timing ${activeTiming === "03:00 - 03:30" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("03:00 - 03:30")}>
-      <span><i className="feather-clock"></i> 03:00 - 03:30</span>
-      </a>
-      </li>
-      <li>
-      <a className={`timing ${activeTiming === "04:00 - 04:30" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("04:00 - 04:30")}>
-      <span><i className="feather-clock"></i> 04:00 - 04:30</span>
-      </a>
-      </li>
-      <li className="time-slot-open time-slot-evening">
-      <a className={`timing ${activeTiming === "05:00 - 05:30" ? "active" : ""}`}
-            href="javascript:void(0);"
-            onClick={() => handleTimingClick("05:00 - 05:30")}>
-      <span><i className="feather-clock"></i> 05:00 - 05:30</span>
-      </a>
-      </li>
-      <li>
+      {eveningShifts.map((shift, index) => (
+                    <li key={index} className={morningShifts.length > 3 && index > 2 ? "time-slot-open time-slot-evening" : ""}>
+                      <a
+                        className={`timing ${activeTiming === shift.time ? "active" : ""}`}
+                        href="javascript:void(0);"
+                        onClick={() => handleTimingClick(shift.time)}
+                      >
+                        <span><i className="feather-clock"></i> {shift.time}</span>
+                      </a>
+                    </li>
+                  ))}
+                  <li>
       <div className="load-more-timings load-more-evening">
       <a href="javascript:void(0);">Load More</a>
       </div>

@@ -7,5 +7,8 @@ const url ={
         LIST: "/departments",
 
     },
+    SHIFT:{
+        LIST:"/shifts"
+    }
 }
 export default url;
