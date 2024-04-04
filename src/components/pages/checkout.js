@@ -1,4 +1,8 @@
 function CheckOut(){
+    const date= localStorage.getItem("selectedDate");
+    const time= localStorage.getItem("selectedTime");
+    const now = new Date();
+    console.log(now);
     return(
         <div className="content">
 <div className="container">
@@ -48,7 +52,7 @@ function CheckOut(){
 <div style={{textAlign:"left"}} className="terms-accept">
 <div className="custom-checkbox">
 <input type="checkbox" required id="terms_accept"/>
-<label for="terms_accept">I have read and accept <a href="terms-condition.html">Terms &amp; Conditions</a></label>
+<label htmlFor="terms_accept">I have read and accept <a href="terms-condition.html">Terms &amp; Conditions</a></label>
 </div>
 </div>
 
@@ -71,8 +75,8 @@ function CheckOut(){
 <div className="booking-summary">
 <div className="booking-item-wrap">
 <ul className="booking-date">
-<li>Date :<span> 16 Nov 2023</span></li>
-<li>Time :<span> 10:00 AM</span></li>
+<li>Date :<span> {date}</span></li>
+<li>Time :<span> {time}</span></li>
 </ul>
 </div>
 </div>
