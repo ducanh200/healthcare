@@ -4,6 +4,7 @@ import url from "../../services/url";
 
 function Booking(){
   const [activeTiming, setActiveTiming] = useState(null);
+  const [shiftId, setShiftId] = useState(null); // State to store the selected shift ID
   const handleTimingClick = (timing) => {
     setActiveTiming(timing);
   };
@@ -63,10 +64,18 @@ const handleNextClick = () => {
     alert("Please select a time before proceeding.");
     return; 
   }
-  // Lưu ngày và thời gian vào localStorage
-  localStorage.setItem("selectedDate", selectedDate.toISOString().split('T')[0]); // Chuyển đổi ngày thành chuỗi YYYY-MM-DD
+  const selectedShift = shifts.find((shift) => shift.time === activeTiming);
+
+    if (selectedShift) {
+      // Set the shift ID in localStorage
+      localStorage.setItem("selectedShiftId", selectedShift.id);
+      // Proceed to the checkout page
+      localStorage.setItem("selectedDate", selectedDate.toISOString().split('T')[0]); // Chuyển đổi ngày thành chuỗi YYYY-MM-DD
   localStorage.setItem("selectedTime", activeTiming);
   window.location.href = "/checkout";
+    } else {
+      console.warn("No shift found for the selected time:", activeTiming);
+    }
 };
   const morningShifts = filterShiftsBySession("morning");
   const afternoonShifts = filterShiftsBySession("afternoon");

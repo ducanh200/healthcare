@@ -1,8 +1,55 @@
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+import url from "../../services/url";
 function CheckOut(){
-    const date= localStorage.getItem("selectedDate");
-    const time= localStorage.getItem("selectedTime");
-    const now = new Date();
-    console.log(now);
+  const date= localStorage.getItem("selectedDate");
+    const selectedTime= localStorage.getItem("selectedTime");
+    const shiftId = localStorage.getItem("selectedShiftId");
+  const [formData, setFormData] = useState({
+    status: 1,
+    date: date,
+    patientId: 1,
+    departmentId: 1,
+    shiftId:shiftId
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Make an HTTP POST request to your backend API endpoint
+      const response = await api.post(url.BOOKING.CREATE, formData);
+
+      window.location.href = "/booking-success";
+      // Redirect to booking success page or handle success message
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // Handle error response
+    }
+  };
+    const [departments, setDepartments] = useState([]); // State to store department data
+
+  useEffect(() => {
+    // Function to fetch department data
+    const fetchDepartments = async () => {
+      try {
+        // Make an HTTP GET request to fetch department data from your API
+        const response = await api.get(url.DEPARTMENT.LIST);
+
+        // Update the departments state with the fetched department data
+        setDepartments(response.data);
+      } catch (error) {
+        console.error("Error fetching departments:", error);
+      }
+    };
+
+    // Call the fetchDepartments function when the component mounts
+    fetchDepartments();
+  }, []);
+  console.log(formData)
     return(
         <div className="content">
 <div className="container">
@@ -11,7 +58,7 @@ function CheckOut(){
 <div className="card">
 <div className="card-body">
 
-<form action="https://doccure.dreamstechnologies.com/html/template/booking-success.html">
+<form onSubmit={handleSubmit}>
 
 <div className="info-widget">
 <h4 className="card-title">Personal Information</h4>
@@ -41,11 +88,14 @@ function CheckOut(){
 <div className="col-md-12 col-sm-12">
   <div style={{textAlign:"left"}} className="mb-3 card-label">
     <label className="mb-2">Department</label>
-    <select class="form-select" aria-label="Default select example">
-      <option value="john">John</option>
-      <option value="mary">Mary</option>
-      <option value="jane">Jane</option>
-    </select>
+    <select name="department_id" value={formData.department_id}
+                          onChange={handleChange} className="form-select" aria-label="Default select example">
+     {departments.map((department) => (
+       <option key={department.id} value={department.id}>
+         {department.name}
+       </option>
+     ))}
+   </select>
   </div>
 </div>
 
@@ -76,7 +126,7 @@ function CheckOut(){
 <div className="booking-item-wrap">
 <ul className="booking-date">
 <li>Date :<span> {date}</span></li>
-<li>Time :<span> {time}</span></li>
+<li>Time :<span> {selectedTime}</span></li>
 </ul>
 </div>
 </div>

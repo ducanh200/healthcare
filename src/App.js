@@ -20,7 +20,7 @@ import Department from './components/pages/department';
 import Login from './components/pages/auth/login';
 import Register from './components/pages/auth/register';
 import CheckOut from './components/pages/checkout';
-import Doctor_profile_settings from './components/pages/doctor_profile_settings';
+import BookingSuccess from './components/pages/booking-success';
 
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/checkout' element={<CheckOut/>}/>
-          <Route path='/doctor_profile_settings' element={<Doctor_profile_settings/>}/>
+          <Route path='/booking-success' element={<BookingSuccess/>}/>
         </Routes>
         <Footer></Footer>
         <div class="mouse-cursor cursor-outer"></div>
