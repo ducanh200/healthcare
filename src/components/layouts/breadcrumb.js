@@ -37,6 +37,9 @@ function BreadCrumb({ currentLocation }){
         case '/booking':
           breadcrumbName = 'Booking';
           break;
+        case '/doctor_profile_settings':
+          breadcrumbName = 'Doctor Profile Settings';
+          break;
     }
 
     return(
