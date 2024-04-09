@@ -77,7 +77,7 @@ const handleNextClick = async () => {
     if (selectedShift) {
       // Calculate the number of bookings for the selected time and date
       const bookingsForSelectedTimeAndDate = bookings.filter((booking) => {
-        return booking.shift_id === selectedShift.id && booking.date === selectedDate.toISOString().split('T')[0];
+        return booking.shiftId === selectedShift.id && booking.date === selectedDate.toISOString().split('T')[0];
       }).length;
 
       if (bookingsForSelectedTimeAndDate < departmentData.maxBooking) {
