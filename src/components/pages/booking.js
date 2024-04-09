@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import url from "../../services/url";
+import { useParams } from "react-router-dom";
 
 function Booking(){
+  const { id } = useParams();
   const [activeTiming, setActiveTiming] = useState(null);
-  const [shiftId, setShiftId] = useState(null); // State to store the selected shift ID
+  const [shiftId, setShiftId] = useState(null);
+  const [departmentData, setDepartmentData] = useState(null); // State to store the selected shift ID
   const handleTimingClick = (timing) => {
     setActiveTiming(timing);
   };
@@ -59,27 +62,60 @@ function Booking(){
   const today = new Date(); // Ngày hiện tại
 const selectedDate = new Date(today.getTime() + (activeDay+1) * 24 * 60 * 60 * 1000); // Tính toán ngày được chọn
 
-const handleNextClick = () => {
+const handleNextClick = async () => {
   if (!activeTiming) {
     alert("Please select a time before proceeding.");
-    return; 
+    return;
   }
-  const selectedShift = shifts.find((shift) => shift.time === activeTiming);
+
+  try {
+    const bookingsResponse = await api.get(url.BOOKING.LIST);
+    const bookings = bookingsResponse.data; // Assuming the bookings data is stored in the data property
+
+    const selectedShift = shifts.find((shift) => shift.time === activeTiming);
 
     if (selectedShift) {
-      // Set the shift ID in localStorage
-      localStorage.setItem("selectedShiftId", selectedShift.id);
-      // Proceed to the checkout page
-      localStorage.setItem("selectedDate", selectedDate.toISOString().split('T')[0]); // Chuyển đổi ngày thành chuỗi YYYY-MM-DD
-  localStorage.setItem("selectedTime", activeTiming);
-  window.location.href = "/checkout";
+      // Calculate the number of bookings for the selected time and date
+      const bookingsForSelectedTimeAndDate = bookings.filter((booking) => {
+        return booking.shift_id === selectedShift.id && booking.date === selectedDate.toISOString().split('T')[0];
+      }).length;
+
+      if (bookingsForSelectedTimeAndDate < departmentData.maxBooking) {
+        // Set the shift ID in localStorage
+        localStorage.setItem("count",bookingsForSelectedTimeAndDate);
+        localStorage.setItem("selectedShiftId", selectedShift.id);
+        // Proceed to the checkout page
+        localStorage.setItem("selectedDate", selectedDate.toISOString().split('T')[0]); // Chuyển đổi ngày thành chuỗi YYYY-MM-DD
+        localStorage.setItem("selectedTime", activeTiming);
+        window.location.href = "/checkout";
+      } else {
+        alert("Maximum booking limit reached for this time slot and date.");
+      }
     } else {
       console.warn("No shift found for the selected time:", activeTiming);
     }
+  } catch (error) {
+    console.error("Error fetching bookings data:", error);
+  }
 };
+
+
   const morningShifts = filterShiftsBySession("morning");
   const afternoonShifts = filterShiftsBySession("afternoon");
   const eveningShifts = filterShiftsBySession("evening");
+
+   // Fetch department data
+    const fetchDepartmentData = async () => {
+      try {
+        const response = await api.get(url.DEPARTMENT.DETAIL+`/${id}`);
+        setDepartmentData(response.data); // Set department data in state
+      } catch (error) {
+        console.error("Error fetching department data:", error);
+      }
+    };
+    useEffect(() => {
+    fetchDepartmentData();
+  }, []);
     return(
       <div className="content content-space">
       <div className="container">
@@ -191,7 +227,7 @@ const handleNextClick = () => {
       <div className="booking-doctor-details">
       <div className="booking-device">
       <div className="booking-device-img">
-      <img src="assets/img/icons/device-message.svg" alt="device-message"/>
+      <img src="../assets/img/icons/device-message.svg" alt="device-message"/>
       </div>
       <div className="booking-doctor-info">
       <h3>We can help you</h3>
@@ -207,17 +243,17 @@ const handleNextClick = () => {
       <div className="booking-doctor-details">
       <div className="booking-device">
       <div className="booking-device-img">
-      <img src="assets/img/icons/smart-phone.svg" alt="smart-phone"/>
+      <img src="../assets/img/icons/smart-phone.svg" alt="smart-phone"/>
       </div>
       <div className="booking-doctor-info">
       <h3>Get the App</h3>
       <p className="device-text">Download our app for better experience and for more feature</p>
       <div className="app-images">
       <a href="javascript:void(0);">
-      <img src="assets/img/google-img.svg" alt="google-image"/>
+      <img src="../assets/img/google-img.svg" alt="google-image"/>
       </a>
       <a href="javascript:void(0);">
-      <img src="assets/img/app-img.svg" alt="app-image"/>
+      <img src="../assets/img/app-img.svg" alt="app-image"/>
       </a>
       </div>
       </div>
