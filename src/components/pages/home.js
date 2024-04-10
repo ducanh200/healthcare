@@ -1,4 +1,5 @@
 import Home_department from "./home/home_department";
+import Home_doctor from "./home/home_doctor";
 
 function Home(){
     return(
@@ -16,216 +17,19 @@ function Home(){
                                     <img src="assets/img/down-arrow-img.png" class="img-fluid" alt="down-arrow"/>
                                 </div>
                             </div>
-                            <div class="search-box-one aos" data-aos="fade-up">
-                                <form action="https://doccure.dreamstechnologies.com/html/template/search-2.html">
-                                    <div class="search-input search-line">
-                                        <i class="feather-search bficon"></i>
-                                        <div class=" mb-0">
-                                            <input type="text" class="form-control" placeholder="Search doctors, clinics, hospitals, etc"/>
-                                        </div>
-                                    </div>
-                                    <div class="search-input search-map-line">
-                                        <i class="feather-map-pin"></i>
-                                        <div class=" mb-0">
-                                            <input type="text" class="form-control" placeholder="Location"/>
-                                            <a class="current-loc-icon current_location" href="javascript:void(0);">
-                                                <i class="feather-crosshair"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="search-input search-calendar-line">
-                                        <i class="feather-calendar"></i>
-                                        <div class=" mb-0">
-                                            <input type="text" class="form-control datetimepicker" placeholder="Date"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-search-btn">
-                                        <button class="btn" type="submit">Search</button>
-                                    </div>
-                                </form>
-                            </div>
+                            
                         </div>
                         <div class="col-lg-6">
                             <div class="banner-img aos" data-aos="fade-up">
                                 <img src="assets/img/banner-img.png" class="img-fluid" alt="patient-image"/>
-                                <div class="banner-img1">
-                                    <img src="assets/img/banner-img1.png" class="img-fluid" alt="checkup-image"/>
-                                </div>
-                                <div class="banner-img2">
-                                    <img src="assets/img/banner-img2.png" class="img-fluid" alt="doctor-slide"/>
-                                </div>
-                                <div class="banner-img3">
-                                    <img src="assets/img/banner-img3.png" class="img-fluid" alt="doctors-list"/>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
             <Home_department></Home_department>
-            <section class="doctors-section">
-                <div class="container" style={{textAlign: "justify"}}>
-                    <div class="row">
-                        <div class="col-md-12 aos" data-aos="fade-up">
-                            <div class="section-header-one text-center">
-                                <h2 class="section-title">Doctors</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-carousel doctor-slider-one owl-theme aos" data-aos="fade-up">
-                        <div class="item">
-                            <div class="doctor-profile-widget">
-                                <div class="doc-pro-img">
-                                    <a href="doctor-profile.html">
-                                        <div class="doctor-profile-img">
-                                            <img src="assets/img/doctors/doctor-03.jpg" class="img-fluid" alt="Ruby Perrin"/>
-                                        </div>
-                                    </a>
-                                    <div class="doctor-amount">
-                                        <span>$ 200</span>
-                                    </div>
-                                </div>
-                                <div class="doc-content">
-                                    <div class="doc-pro-info">
-                                        <div class="doc-pro-name">
-                                            <a href="doctor-profile.html">Dr. Ruby Perrin</a>
-                                            <p>Cardiology</p>
-                                        </div>
-                                        <div class="reviews-ratings">
-                                            <p>
-                                                <span><i class="fas fa-star"></i> 4.5</span> (35)
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="doc-pro-location">
-                                        <p><i class="feather-map-pin"></i> New York, USA</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="doctor-profile-widget">
-                                <div class="doc-pro-img">
-                                    <a href="doctor-profile.html">
-                                        <div class="doctor-profile-img">
-                                            <img src="assets/img/doctors/doctor-04.jpg" class="img-fluid" alt="Darren Elder"/>
-                                        </div>
-                                    </a>
-                                    <div class="doctor-amount">
-                                        <span>$ 360</span>
-                                    </div>
-                                </div>
-                                <div class="doc-content">
-                                    <div class="doc-pro-info">
-                                        <div class="doc-pro-name">
-                                            <a href="doctor-profile.html">Dr. Darren Elder</a>
-                                            <p>Neurology</p>
-                                        </div>
-                                        <div class="reviews-ratings">
-                                            <p>
-                                                <span><i class="fas fa-star"></i> 4.0</span> (20)
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="doc-pro-location">
-                                        <p><i class="feather-map-pin"></i> Florida, USA</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="doctor-profile-widget">
-                                <div class="doc-pro-img">
-                                    <a href="doctor-profile.html">
-                                        <div class="doctor-profile-img">
-                                            <img src="assets/img/doctors/doctor-05.jpg" class="img-fluid" alt="Sofia Brient"/>
-                                        </div>
-                                    </a>
-                                    <div class="doctor-amount">
-                                        <span>$ 450</span>
-                                    </div>
-                                </div>
-                                <div class="doc-content">
-                                    <div class="doc-pro-info">
-                                        <div class="doc-pro-name">
-                                            <a href="doctor-profile.html">Dr. Sofia Brient</a>
-                                            <p>Urology</p>
-                                        </div>
-                                        <div class="reviews-ratings">
-                                            <p>
-                                                <span><i class="fas fa-star"></i> 4.5</span> (30)
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="doc-pro-location">
-                                        <p><i class="feather-map-pin"></i> Georgia, USA</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="doctor-profile-widget">
-                                <div class="doc-pro-img">
-                                    <a href="doctor-profile.html">
-                                        <div class="doctor-profile-img">
-                                            <img src="assets/img/doctors/doctor-02.jpg" class="img-fluid" alt="Paul Richard"/>
-                                        </div>
-                                    </a>
-                                    <div class="doctor-amount">
-                                        <span>$ 570</span>
-                                    </div>
-                                </div>
-                                <div class="doc-content">
-                                    <div class="doc-pro-info">
-                                        <div class="doc-pro-name">
-                                            <a href="doctor-profile.html">Dr. Paul Richard</a>
-                                            <p>Orthopedic</p>
-                                        </div>
-                                        <div class="reviews-ratings">
-                                            <p>
-                                                <span><i class="fas fa-star"></i> 4.3</span> (45)
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="doc-pro-location">
-                                        <p><i class="feather-map-pin"></i> Michigan, USA</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="doctor-profile-widget">
-                                <div class="doc-pro-img">
-                                    <a href="doctor-profile.html">
-                                        <div class="doctor-profile-img">
-                                            <img src="assets/img/doctors/doctor-01.jpg" class="img-fluid" alt="John Doe"/>
-                                        </div>
-                                    </a>
-                                    <div class="doctor-amount">
-                                        <span>$ 880</span>
-                                    </div>
-                                </div>
-                                <div class="doc-content">
-                                    <div class="doc-pro-info">
-                                        <div class="doc-pro-name">
-                                            <a href="doctor-profile.html">Dr. John Doe</a>
-                                            <p>Dentist</p>
-                                        </div>
-                                        <div class="reviews-ratings">
-                                            <p>
-                                                <span><i class="fas fa-star"></i> 4.4</span> (50)
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="doc-pro-location">
-                                        <p><i class="feather-map-pin"></i> California, USA</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Home_doctor></Home_doctor>
             <section class="pricing-section">
                 <div class="container" style={{textAlign: "justify"}}>
                     <div class="row">
@@ -797,81 +601,6 @@ function Home(){
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <section class="partners-section">
-                <div class="container" style={{textAlign: "justify"}}>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="section-header-one text-center aos" data-aos="fade-up">
-                                <h2 class="section-title">Our Partners</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="partners-info aos" data-aos="fade-up">
-                        <ul class="owl-carousel partners-slider d-flex">
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-1.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-2.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-3.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-4.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-5.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-6.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-1.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-2.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-3.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-4.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-5.svg" alt="partners"/>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <img class="img-fluid" src="assets/img/partners/partners-6.svg" alt="partners"/>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </section>

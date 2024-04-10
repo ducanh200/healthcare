@@ -65,7 +65,6 @@ const handleNextClick = () => {
     return; 
   }
   const selectedShift = shifts.find((shift) => shift.time === activeTiming);
-
     if (selectedShift) {
       // Set the shift ID in localStorage
       localStorage.setItem("selectedShiftId", selectedShift.id);
