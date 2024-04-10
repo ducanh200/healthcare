@@ -82,7 +82,7 @@ const handleNextClick = async () => {
 
       if (bookingsForSelectedTimeAndDate < departmentData.maxBooking) {
         // Set the shift ID in localStorage
-        localStorage.setItem("count",bookingsForSelectedTimeAndDate);
+        localStorage.setItem("departmentId",id);
         localStorage.setItem("selectedShiftId", selectedShift.id);
         // Proceed to the checkout page
         localStorage.setItem("selectedDate", selectedDate.toISOString().split('T')[0]); // Chuyển đổi ngày thành chuỗi YYYY-MM-DD

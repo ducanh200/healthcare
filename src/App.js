@@ -56,7 +56,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/checkout' element={<CheckOut />} />
-          <Route path='/booking-success' element={<BookingSuccess />} />
+          <Route path='/booking-success/:id' element={<BookingSuccess />} />
           <Route path='/doctor_profile_settings' element={<Doctor_profile_settings />} />
         </Routes>
         <Footer></Footer>
