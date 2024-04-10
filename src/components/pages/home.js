@@ -12,7 +12,7 @@ function Home(){
                                 <h1>Consult <span>Best Doctors</span> Your Nearby Location.</h1>
                                 <img src="assets/img/icons/header-icon.svg" class="header-icon" alt="header-icon"/>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-                                <a href="/booking" class="btn" style={{marginRight: "450px"}}>Start a Consult</a>
+                                <a href="/department" class="btn" style={{marginRight: "450px"}}>Start a Consult</a>
                                 <div class="banner-arrow-img">
                                     <img src="assets/img/down-arrow-img.png" class="img-fluid" alt="down-arrow"/>
                                 </div>

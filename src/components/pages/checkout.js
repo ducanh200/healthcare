@@ -2,20 +2,39 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import url from "../../services/url";
 function CheckOut(){
-  const date= localStorage.getItem("selectedDate");
-    const selectedTime= localStorage.getItem("selectedTime");
-    const shiftId = localStorage.getItem("selectedShiftId");
+  const date = localStorage.getItem("selectedDate");
+  const selectedTime = localStorage.getItem("selectedTime");
+  const shiftId = localStorage.getItem("selectedShiftId");
+  const id = localStorage.getItem("departmentId");
+  const [departments, setDepartments] = useState(null); // State to store department data
+
+  // Function to fetch department data
+  const fetchDepartmentData = async () => {
+    try {
+      const response = await api.get(url.DEPARTMENT.DETAIL + `/${id}`);
+      setDepartments(response.data); // Set department data in state
+    } catch (error) {
+      console.error("Error fetching department data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDepartmentData();
+  }, [id]); // Adding 'id' as a dependency to fetch data when 'id' changes
+
   const [formData, setFormData] = useState({
     status: 1,
     date: date,
     patientId: 1,
-    departmentId: 1,
-    shiftId:shiftId
+    departmentId: id,
+    shiftId: shiftId
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,33 +42,13 @@ function CheckOut(){
       // Make an HTTP POST request to your backend API endpoint
       const response = await api.post(url.BOOKING.CREATE, formData);
 
-      window.location.href = "/booking-success";
+      window.location.href = `/booking-success/${response.data.id}`;
       // Redirect to booking success page or handle success message
     } catch (error) {
       console.error("Error submitting form:", error);
       // Handle error response
     }
   };
-    const [departments, setDepartments] = useState([]); // State to store department data
-
-  useEffect(() => {
-    // Function to fetch department data
-    const fetchDepartments = async () => {
-      try {
-        // Make an HTTP GET request to fetch department data from your API
-        const response = await api.get(url.DEPARTMENT.LIST);
-
-        // Update the departments state with the fetched department data
-        setDepartments(response.data);
-      } catch (error) {
-        console.error("Error fetching departments:", error);
-      }
-    };
-
-    // Call the fetchDepartments function when the component mounts
-    fetchDepartments();
-  }, []);
-  console.log(formData)
     return(
         <div className="content">
 <div className="container">
@@ -85,20 +84,6 @@ function CheckOut(){
 </div>
 <div style={{textAlign:"left"}} className="exist-customer">Existing Customer? <a href="/login">Click here to login</a></div>
 </div>
-<div className="col-md-12 col-sm-12">
-  <div style={{textAlign:"left"}} className="mb-3 card-label">
-    <label className="mb-2">Department</label>
-    <select name="department_id" value={formData.department_id}
-                          onChange={handleChange} className="form-select" aria-label="Default select example">
-     {departments.map((department) => (
-       <option key={department.id} value={department.id}>
-         {department.name}
-       </option>
-     ))}
-   </select>
-  </div>
-</div>
-
 <div style={{textAlign:"left"}} className="terms-accept">
 <div className="custom-checkbox">
 <input type="checkbox" required id="terms_accept"/>
@@ -122,6 +107,14 @@ function CheckOut(){
 <h4 className="card-title">Booking Summary</h4>
 </div>
 <div className="card-body">
+<div className="booking-doc-info">
+<a href="#" className="booking-doc-img">
+<img src={departments && departments.thumbnail} alt="User Image"/>
+</a>
+<div className="booking-info">
+<h4><a href="#">{departments && departments.name}</a></h4>
+</div>
+</div>
 <div className="booking-summary">
 <div className="booking-item-wrap">
 <ul className="booking-date">

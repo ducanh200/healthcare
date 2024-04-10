@@ -5,13 +5,14 @@ const url ={
     },
     DEPARTMENT:{
         LIST: "/departments",
-
+        DETAIL:"/departments"
     },
     SHIFT:{
         LIST:"/shifts"
     },
     BOOKING:{
-        CREATE:"/bookings"
+        CREATE:"/bookings",
+        LIST:"/bookings"
     }
 }
 export default url;

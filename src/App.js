@@ -33,17 +33,17 @@ function App() {
   return (
     <div className="App">
       <div id="loader">
-        <div class="loader">
+        <div className="loader">
           <span></span>
           <span></span>
         </div>
       </div>
-      <div class="main-wrapper">
+      <div className="main-wrapper">
         <Header></Header>
         <BreadCrumb currentLocation={location.pathname} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/booking' element={<Booking />} />
+          <Route path='/booking/:id' element={<Booking />} />
           <Route path='/prescription_details' element={<Prescription_details />} />
           <Route path='/404' element={<Error404 />} />
           <Route path='/blog_details' element={<Blog_details />} />
@@ -56,15 +56,15 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/checkout' element={<CheckOut />} />
-          <Route path='/booking-success' element={<BookingSuccess />} />
+          <Route path='/booking-success/:id' element={<BookingSuccess />} />
           <Route path='/doctor_profile_settings' element={<Doctor_profile_settings />} />
         </Routes>
         <Footer></Footer>
-        <div class="mouse-cursor cursor-outer"></div>
-        <div class="mouse-cursor cursor-inner"></div>
+        <div className="mouse-cursor cursor-outer"></div>
+        <div className="mouse-cursor cursor-inner"></div>
       </div>
-      <div class="progress-wrap active-progress">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <div className="progress-wrap active-progress">
+        <svg className="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
           <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style={{ transition: 'stroke-dashoffset 10ms linear 0s', strokeDasharray: '307.919px, 307.919px', strokeDashoffset: '228.265px' }}></path>
         </svg>
       </div>
