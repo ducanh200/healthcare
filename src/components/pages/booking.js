@@ -68,12 +68,12 @@ const handleNextClick = async () => {
     return;
   }
 
+
   try {
     const bookingsResponse = await api.get(url.BOOKING.LIST);
     const bookings = bookingsResponse.data; // Assuming the bookings data is stored in the data property
 
     const selectedShift = shifts.find((shift) => shift.time === activeTiming);
-
     if (selectedShift) {
       // Calculate the number of bookings for the selected time and date
       const bookingsForSelectedTimeAndDate = bookings.filter((booking) => {

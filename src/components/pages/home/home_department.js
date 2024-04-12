@@ -1,4 +1,22 @@
+import { useEffect, useState } from "react";
+import url from "../../../services/url";
+import api from "../../../services/api";
+
+
 function Home_department() {
+        const [departments, setDepartments] = useState([]);
+
+    useEffect(() => {
+        const loadDepartment = async () => {
+            try {
+                const rs = await api.get(url.DEPARTMENT.LIST);
+                setDepartments(rs.data);
+            } catch (error) {
+                console.error("Error loading departments:", error);
+            }
+        };
+        loadDepartment();
+    }, []);
     return (
         <section className="specialities-section-one">
             <div className="container" style={{textAlign:"justify"}}>
@@ -9,67 +27,19 @@ function Home_department() {
                         </div>
                     </div>
                 </div>
+                
                 <div className="owl-carousel specialities-slider-one owl-theme aos" data-aos="fade-up">
+                    {departments.map((department, index) => (
                     <div className="item">
                         <div className="specialities-item">
                             <div className="specialities-img">
-                                <span><img src="assets/img/specialities/specialities-01.svg" alt="heart-image" /></span>
+                                <span><img src={department.thumbnail} alt={department.name} /></span>
                             </div>
-                            <p>Cardiology</p>
+                            <p>{department.name}</p>
                         </div>
                     </div>
-                    <div className="item">
-                        <div className="specialities-item">
-                            <div className="specialities-img">
-                                <span><img src="assets/img/specialities/specialities-02.svg" alt="brain-image" /></span>
-                            </div>
-                            <p>Neurology</p>
-                        </div>
+                    ))}
                     </div>
-                    <div className="item">
-                        <div className="specialities-item">
-                            <div className="specialities-img">
-                                <span><img src="assets/img/specialities/specialities-03.svg" alt="kidney-image" /></span>
-                            </div>
-                            <p>Urology</p>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className="specialities-item">
-                            <div className="specialities-img">
-                                <span><img src="assets/img/specialities/specialities-04.svg" alt="bone-image" /></span>
-                            </div>
-                            <p>Orthopedic</p>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className="specialities-item">
-                            <div className="specialities-img">
-                                <span><img src="assets/img/specialities/specialities-05.svg" alt="dentist" /></span>
-                            </div>
-                            <p>Dentist</p>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className="specialities-item">
-                            <div className="specialities-img">
-                                <span><img src="assets/img/specialities/specialities-06.svg" alt="eye-image" /></span>
-                            </div>
-                            <p>Ophthalmology</p>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className="specialities-item">
-                            <div className="specialities-img">
-                                <span><img src="assets/img/specialities/specialities-02.svg" alt="brain-image" /></span>
-                            </div>
-                            <p>Neurology</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="specialities-btn aos" data-aos="fade-up">
-                    <a href="search.html" className="btn">See All Specialities</a>
-                </div>
             </div>
         </section>
     );
