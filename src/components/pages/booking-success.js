@@ -5,30 +5,42 @@ import { useEffect, useState } from "react";
 
 function BookingSuccess(){
     const {id} = useParams();
-    const [bookings, setBookings] = useState();
-    const [time,setTimes]=useState();
+    const [bookings, setBookings] = useState({
+      id:id,
+      bookingAt:'',
+      status:0,
+      date:'',
+      patient_id:0,
+      department_id:0,
+      shiftId:0,
+    });
+    const [time,setTimes]=useState({
+      id:bookings.shiftId,
+      time:0,
+      session:''
+    });
+    const [department,setDepartments]=useState({
+      id:0,
+      name:'',
+      expense:0,
+      maxBooking:0,
+      thumbnail:'',
+      description:''
+    });
     const fetchBookingData = async () => {
         try {
           const response = await api.get(url.BOOKING.LIST+`/${id}`);
           setBookings(response.data); // Set department data in state
+          const responseShift = await api.get(url.SHIFT.LIST+`/${ response.data.shiftId}`);
+          setTimes(responseShift.data);
+          const responseDepartment = await api.get(url.DEPARTMENT.LIST+`/${ response.data.departmentId}`);
+          setDepartments(responseDepartment.data); // Set department data in state
         } catch (error) {
           console.error("Error fetching department data:", error);
         }
       };
-      useEffect(() => {
+    useEffect(() => {
       fetchBookingData();
-    }, []);
-    const fetchTimeData = async () => {
-        try {
-          const response = await api.get(url.SHIFT.LIST+`/${bookings.shiftId}`);
-          setTimes(response.data); // Set department data in state
-        } catch (error) {
-          console.error("Error fetching department data:", error);
-        }
-      };
-      useEffect(() => {
-      fetchTimeData();
-      console.log(time)
     }, []);
     return(
         <div className="doctor-content">
@@ -54,22 +66,22 @@ function BookingSuccess(){
 <div className="booking-doctor-left booking-success-info">
 <div className="booking-doctor-img">
 <a href="javascript:void(0);">
-<img src="assets/img/doctors/doctor-02.jpg" alt="John Doe" className="img-fluid"/>
+<img src={department.thumbnail} alt="John Doe" className="img-fluid"/>
 </a>
 </div>
 <div className="booking-doctor-info">
-<h4><a href="javascript:void(0);">Dr. John Doe</a></h4>
-<p>MBBS, Dentist</p>
+<h4><a href="javascript:void(0);">{department.name}</a></h4>
+<p>{department.description}</p>
 <div className="booking-doctor-location">
-<p><i className="feather-map-pin"></i> Newyork, USA</p>
+<p><i class="far fa-money-bill-alt"></i> ${department.expense}</p>
 </div>
 </div>
 </div>
 <div className="booking-list">
 <div className="booking-date-list consultation-date-list">
 <ul>
-<li>Booking Date: <span>{bookings && bookings.date} </span></li>
-<li>Booking Time: <span>{bookings && bookings.time}</span></li>
+<li>Booking Date: <span>{ bookings.date} </span></li>
+<li>Booking Time: <span>{ time.time}</span></li>
 <li>Type of Consultaion: <span><i className="feather-users"></i>  Consult Instatly</span></li>
 </ul>
 </div>
