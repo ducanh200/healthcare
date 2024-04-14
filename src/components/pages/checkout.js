@@ -6,7 +6,14 @@ function CheckOut(){
   const selectedTime = localStorage.getItem("selectedTime");
   const shiftId = localStorage.getItem("selectedShiftId");
   const id = localStorage.getItem("departmentId");
-  const [departments, setDepartments] = useState(null); // State to store department data
+  const [departments, setDepartments] = useState({
+    id:0,
+      name:'',
+      expense:0,
+      maxBooking:0,
+      thumbnail:'',
+      description:''
+  }); // State to store department data
 
   // Function to fetch department data
   const fetchDepartmentData = async () => {
@@ -37,13 +44,25 @@ function CheckOut(){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
+      const bookingsResponse = await api.get(url.BOOKING.LIST);
+    const bookings = bookingsResponse.data; // Assuming the bookings data is stored in the data property
+    const shifts = await api.get(url.SHIFT.LIST);
+    const selectedShift = shifts.data.find((shift) => shift.time === selectedTime);;
+    const bookingsForSelectedTimeAndDate = bookings.filter((booking) => {
+      return booking.shiftId === selectedShift.id && booking.date === date;
+    }).length;
+    if (bookingsForSelectedTimeAndDate < departments.maxBooking) {
       // Make an HTTP POST request to your backend API endpoint
       const response = await api.post(url.BOOKING.CREATE, formData);
 
       window.location.href = `/booking-success/${response.data.id}`;
       // Redirect to booking success page or handle success message
+    }
+    else {
+      alert("Maximum booking limit reached for this time slot and date. Please choose another time slot.");
+      window.location.href = `/booking/${id}`;
+    }
     } catch (error) {
       console.error("Error submitting form:", error);
       // Handle error response
@@ -109,10 +128,10 @@ function CheckOut(){
 <div className="card-body">
 <div className="booking-doc-info">
 <a href="#" className="booking-doc-img">
-<img src={departments && departments.thumbnail} alt="User Image"/>
+<img src={departments.thumbnail} alt="User Image"/>
 </a>
 <div className="booking-info">
-<h4><a href="#">{departments && departments.name}</a></h4>
+<h4><a href="#">{departments.name}</a></h4>
 </div>
 </div>
 <div className="booking-summary">
