@@ -40,6 +40,9 @@ function BreadCrumb({ currentLocation }){
         case '/doctor_profile_settings':
           breadcrumbName = 'Doctor Profile Settings';
           break;
+          case '/partient_dashboard':
+            breadcrumbName = 'Partient Dashboard';
+            break;
     }
 
     return(
