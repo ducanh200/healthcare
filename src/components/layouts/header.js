@@ -1,4 +1,42 @@
+
+import { useEffect, useState } from "react";
+import { decodeToken, useJwt } from "react-jwt";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import api from "../../services/api";
+import url from "../../services/url";
 function Header(){
+    const [customerName, setCustomerName] = useState("");
+    const { isExpired, isInvalid } = useJwt();
+    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchDoctorProfile = async () => {
+            try {
+                const response = await api.get(url.PATIENT.PROFILE, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+                const customerName = response.data.name;
+                setCustomerName(customerName);
+            } catch (error) {
+                console.error("Error fetching doctor profile:", error);
+            }
+        };
+fetchDoctorProfile();
+    }, [isExpired, isInvalid]);
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        setCustomerName("");
+    };
+    const accessTokenExists = !!localStorage.getItem("accessToken");
+     // Get the current location
+  const location = useLocation();
+  // Check if the current path is '/'
+  const isHomePage = location.pathname === '/';
+    
     return(
         <header className="header header-custom header-fixed header-one">
             <div className="container">
@@ -62,13 +100,29 @@ function Header(){
                         </form>
                         </div>
                     </li>
-                    <li className="login-link"><a href="login.html">Login / Signup</a></li>
-                    <li className="register-btn">
-                        <a href="register" className="btn reg-btn"><i className="feather-user"></i>Register</a>
-                    </li>
-                    <li className="register-btn">
-                        <a href="login" className="btn btn-primary log-btn"><i className="feather-lock"></i>Login</a>
-                    </li>
+                    {accessTokenExists ? (
+                    <>
+                        <li className="login-link">
+                            <a href="login.html">Login / Signup</a>
+                        </li>
+                        <li className="register-btn">
+                            <span className="btn log-btn">Welcome, {customerName}</span>
+                        </li>
+                        <li className="register-btn">
+                        <a href="login" onClick={handleLogout} className="btn btn-danger"><i className="fa-solid fa-arrow-left"></i>Logout</a>
+                        </li>
+                    </>
+                ) : (
+                    <>
+
+                        <li className="register-btn">
+                            <a href="register" className="btn reg-btn"><i className="feather-user"></i>Register</a>
+                        </li>
+                        <li className="register-btn">
+                            <a href="login" className="btn btn-primary log-btn"><i className="feather-lock"></i>Login</a>
+                        </li>
+                    </>
+                )}
                     </ul>
                 </div>
                 </nav>
