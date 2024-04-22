@@ -50,7 +50,7 @@ function CheckOut(){
     const shifts = await api.get(url.SHIFT.LIST);
     const selectedShift = shifts.data.find((shift) => shift.time === selectedTime);;
     const bookingsForSelectedTimeAndDate = bookings.filter((booking) => {
-      return booking.shiftId === selectedShift.id && booking.date === date;
+      return booking.shiftId === selectedShift.id && booking.date === date && booking.departmentId === id;
     }).length;
     if (bookingsForSelectedTimeAndDate < departments.maxBooking) {
       // Make an HTTP POST request to your backend API endpoint
