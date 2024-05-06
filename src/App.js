@@ -23,6 +23,7 @@ import CheckOut from './components/pages/checkout';
 import BookingSuccess from './components/pages/booking-success';
 import Doctor_profile_settings from './components/pages/doctor_profile_settings';
 import Patient_Dashboard from './components/pages/partient_dashboard';
+import Social_Media from './components/pages/social_media';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <Route path='/booking-success/:id' element={<BookingSuccess />} />
           <Route path='/doctor_profile_settings' element={<Doctor_profile_settings />} />
           <Route path='/partient_dashboard' element={<Patient_Dashboard />} />
+          <Route path='/social_media' element={<Social_Media />} />
         </Routes>
         <Footer></Footer>
         <div className="mouse-cursor cursor-outer"></div>

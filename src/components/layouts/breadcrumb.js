@@ -43,6 +43,9 @@ function BreadCrumb({ currentLocation }){
           case '/partient_dashboard':
             breadcrumbName = 'Partient Dashboard';
             break;
+            case '/social_media':
+              breadcrumbName = 'Social Media';
+              break;
     }
 
     return(
