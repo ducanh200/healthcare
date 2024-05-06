@@ -23,6 +23,7 @@ import CheckOut from './components/pages/checkout';
 import BookingSuccess from './components/pages/booking-success';
 import Doctor_profile_settings from './components/pages/doctor_profile_settings';
 import Patient_Dashboard from './components/pages/partient_dashboard';
+import Social_Media from './components/pages/social_media';
 import { useJwt } from 'react-jwt';
 
 
@@ -82,6 +83,8 @@ const ProtectedLoginRoute = ({ element }) => {
           <Route path='/checkout' element={<ProtectedRoute element={<CheckOut />}/>} />
           <Route path='/booking-success/:id' element={<ProtectedRoute element={<BookingSuccess />}/>} />
           <Route path='/doctor_profile_settings' element={<Doctor_profile_settings />} />
+          <Route path='/partient_dashboard' element={<Patient_Dashboard />} />
+          <Route path='/social_media' element={<Social_Media />} />
           <Route path='/partient_dashboard' element={<ProtectedRoute element={<Patient_Dashboard />}/>} />
         </Routes>
         <Footer></Footer>
