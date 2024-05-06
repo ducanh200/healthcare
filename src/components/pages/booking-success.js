@@ -16,7 +16,7 @@ function BookingSuccess(){
     });
     const [time,setTimes]=useState({
       id:bookings.shiftId,
-      time:0,
+      time:"",
       session:''
     });
     const [department,setDepartments]=useState({
@@ -25,15 +25,15 @@ function BookingSuccess(){
       expense:0,
       maxBooking:0,
       thumbnail:'',
-      description:''
+      description:'',
     });
     const fetchBookingData = async () => {
         try {
           const response = await api.get(url.BOOKING.LIST+`/${id}`);
           setBookings(response.data); // Set department data in state
-          const responseShift = await api.get(url.SHIFT.LIST+`/${ response.data.shiftId}`);
+          const responseShift = await api.get(url.SHIFT.LIST+`/${ response.data.shift.id}`);
           setTimes(responseShift.data);
-          const responseDepartment = await api.get(url.DEPARTMENT.LIST+`/${ response.data.departmentId}`);
+          const responseDepartment = await api.get(url.DEPARTMENT.LIST+`/${ response.data.department.id}`);
           setDepartments(responseDepartment.data); // Set department data in state
         } catch (error) {
           console.error("Error fetching department data:", error);
@@ -42,6 +42,34 @@ function BookingSuccess(){
     useEffect(() => {
       fetchBookingData();
     }, []);
+    const generateGoogleCalendarLink = (date, time) => {
+      // Combine date and time strings into a single datetime string
+      const datetimeString = `${date}T${time}`;
+  
+      // Create a Date object using the combined datetime string
+      const dateTime = new Date(datetimeString);
+  
+      // Check if the Date object is valid
+      if (isNaN(dateTime.getTime())) {
+          console.error('Invalid date or time');
+          return null;
+      }
+  
+      // Convert the Date object to ISO string
+      const isoString = dateTime.toISOString();
+  
+      // Generate Google Calendar link using the ISO string
+      const googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&dates=${isoString}`;
+  
+      return googleCalendarLink;
+  };
+  
+  // Usage example
+  const date = '2024-05-04';
+  const timee = '08:00:00';
+  const googleCalendarLink = generateGoogleCalendarLink(date, timee);
+  console.log(googleCalendarLink);
+  
     return(
         <div className="doctor-content">
 <div className="container">
@@ -89,11 +117,8 @@ function BookingSuccess(){
 </div>
 </div>
 <div className="success-btn">
-<a href="javascript:void(0);" className="btn btn-primary prime-btn">
+<a href={generateGoogleCalendarLink()} className="btn btn-primary prime-btn">
 Add to Google Calendar
-</a>
-<a href="javascript:void(0);" className="btn btn-light">
-Appointment
 </a>
 </div>
 <div className="success-dashboard-link">

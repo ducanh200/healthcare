@@ -1,4 +1,42 @@
+
+import { useEffect, useState } from "react";
+import { decodeToken, useJwt } from "react-jwt";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import api from "../../services/api";
+import url from "../../services/url";
 function Header(){
+    const [customerName, setCustomerName] = useState("");
+    const { isExpired, isInvalid } = useJwt();
+    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchDoctorProfile = async () => {
+            try {
+                const response = await api.get(url.PATIENT.PROFILE, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+                const customerName = response.data.name;
+                setCustomerName(customerName);
+            } catch (error) {
+                console.error("Error fetching doctor profile:", error);
+            }
+        };
+fetchDoctorProfile();
+    }, [isExpired, isInvalid]);
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        setCustomerName("");
+    };
+    const accessTokenExists = !!localStorage.getItem("accessToken");
+     // Get the current location
+  const location = useLocation();
+  // Check if the current path is '/'
+  const isHomePage = location.pathname === '/';
+    
     return(
         <header className="header header-custom header-fixed header-one">
             <div className="container">
@@ -26,33 +64,24 @@ function Header(){
                     </div>
                     <ul className="main-nav">
                     <li className="has-submenu megamenu active">
-                        <a style={{marginRight:"10px"}} href="javascript:void(0);">Home</a>
+                        <a style={{marginRight:"10px"}} href="/">Home</a>
                     </li>
-                    <li className="has-submenu">
-                        <a href="javascript:void(0);">Doctors <i className="fas fa-chevron-down"></i></a>
-                        <ul className="submenu">
-                        <li><a href="doctor-dashboard.html">Doctor Dashboard</a></li>
-                        <li><a href="appointments.html">Appointments</a></li>
-                        <li><a href="schedule-timings.html">Schedule Timing</a></li>
-                        <li><a href="my-patients.html">Patients List</a></li>
-                        <li><a href="patient-profile.html">Patients Profile</a></li>
-                        <li><a href="chat-doctor.html">Chat</a></li>
-                        <li><a href="invoices.html">Invoices</a></li>
-                        <li><a href="doctor-profile-settings.html">Profile Settings</a></li>
-                        <li><a href="reviews.html">Reviews</a></li>
-                        <li><a href="doctor-register.html">Doctor Register</a></li>
-                        <li className="has-submenu">
-                            <a href="doctor-blog.html">Blog</a>
-                            <ul className="submenu">
-                            <li><a href="doctor-blog.html">Blog</a></li>
-                            <li><a href="blog-details.html">Blog view</a></li>
-                            <li><a href="doctor-add-blog.html">Add Blog</a></li>
-                            </ul>
-                        </li>
-                        </ul>
+                    <li className="has-submenu megamenu active">
+                        <a style={{marginRight:"10px"}} href="/blog_details">Blog</a>
+                    </li>
+                    <li className="has-submenu megamenu active">
+                        <a style={{marginRight:"10px"}} href="/department">Booking Now</a>
+                    </li>
+                    <li className="has-submenu megamenu active">
+                        <a style={{marginRight:"10px"}} href="/contact">Contact</a>
+                    </li>
+                    <li className="has-submenu megamenu active">
+                        <a style={{marginRight:"10px"}} href="/aboutus">About Us</a>
+                    </li>
+                    <li className="has-submenu megamenu active">
+                        <a style={{marginRight:"10px"}} href="/invoice">Invoice</a>
                     </li>
                     <li className="searchbar">
-                        <a href="javascript:void(0);"><i className="feather-search"></i></a>
                         <div className="togglesearch">
                         <form action="https://doccure.dreamstechnologies.com/html/template/search.html">
                             <div className="input-group">
@@ -62,13 +91,29 @@ function Header(){
                         </form>
                         </div>
                     </li>
-                    <li className="login-link"><a href="login.html">Login / Signup</a></li>
-                    <li className="register-btn">
-                        <a href="register" className="btn reg-btn"><i className="feather-user"></i>Register</a>
-                    </li>
-                    <li className="register-btn">
-                        <a href="login" className="btn btn-primary log-btn"><i className="feather-lock"></i>Login</a>
-                    </li>
+                    {accessTokenExists ? (
+                    <>
+                        <li className="login-link">
+                            <a href="login.html">Login / Signup</a>
+                        </li>
+                        <li className="register-btn">
+                            <span className="btn log-btn">Welcome, {customerName}</span>
+                        </li>
+                        <li className="register-btn">
+                        <a href="login" onClick={handleLogout} className="btn btn-danger"><i className="fa-solid fa-arrow-left"></i>Logout</a>
+                        </li>
+                    </>
+                ) : (
+                    <>
+
+                        <li className="register-btn">
+                            <a href="register" className="btn reg-btn"><i className="feather-user"></i>Register</a>
+                        </li>
+                        <li className="register-btn">
+                            <a href="login" className="btn btn-primary log-btn"><i className="feather-lock"></i>Login</a>
+                        </li>
+                    </>
+                )}
                     </ul>
                 </div>
                 </nav>

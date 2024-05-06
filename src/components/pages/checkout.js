@@ -6,6 +6,13 @@ function CheckOut(){
   const selectedTime = localStorage.getItem("selectedTime");
   const shiftId = localStorage.getItem("selectedShiftId");
   const id = localStorage.getItem("departmentId");
+  const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
+    const [patients,setPatients]=useState({
+        id:0,
+        name:'',
+        email:"",
+        phonenumber:"",
+    });
   const [departments, setDepartments] = useState({
     id:0,
       name:'',
@@ -24,15 +31,30 @@ function CheckOut(){
       console.error("Error fetching department data:", error);
     }
   };
-
+  const fetchDoctorProfile = async () => {
+    try {
+        const response = await api.get(url.PATIENT.PROFILE, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+        setPatients(response.data)
+    } catch (error) {
+        console.error("Error fetching doctor profile:", error);
+    }
+};
   useEffect(() => {
+    fetchDoctorProfile();
     fetchDepartmentData();
-  }, [id]); // Adding 'id' as a dependency to fetch data when 'id' changes
-
+    setFormData({
+      ...formData,
+      patientId: patients.id
+  });
+  }, [id,patients]); // Adding 'id' as a dependency to fetch data when 'id' changes
   const [formData, setFormData] = useState({
     status: 1,
     date: date,
-    patientId: 1,
+    patientId: patients.id,
     departmentId: id,
     shiftId: shiftId
   });
@@ -50,7 +72,7 @@ function CheckOut(){
     const shifts = await api.get(url.SHIFT.LIST);
     const selectedShift = shifts.data.find((shift) => shift.time === selectedTime);;
     const bookingsForSelectedTimeAndDate = bookings.filter((booking) => {
-      return booking.shiftId === selectedShift.id && booking.date === date;
+      return booking.shiftId === selectedShift.id && booking.date === date && booking.departmentId === id;
     }).length;
     if (bookingsForSelectedTimeAndDate < departments.maxBooking) {
       // Make an HTTP POST request to your backend API endpoint
@@ -84,20 +106,20 @@ function CheckOut(){
 <div className="col-md-12 col-sm-12">
 <div className="mb-3 card-label">
 <label className="mb-2" >Your Name</label>
-<input className="form-control" type="text"/>
+<input value={patients.name} className="form-control" type="text"/>
 </div>
 </div>
 
 <div className="col-md-6 col-sm-12">
 <div style={{textAlign:"left"}} className="mb-3 card-label">
 <label className="mb-2">Email</label>
-<input className="form-control" type="email"/>
+<input value={patients.email} className="form-control" type="email"/>
 </div>
 </div>
 <div className="col-md-6 col-sm-12">
 <div style={{textAlign:"left"}} className="mb-3 card-label">
 <label className="mb-2">Phone</label>
-<input className="form-control" type="text"/>
+<input value={patients.phonenumber} className="form-control" type="text"/>
 </div>
 </div>
 </div>

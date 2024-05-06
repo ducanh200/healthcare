@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Header from './components/layouts/header';
 import Footer from './components/layouts/footer';
@@ -24,14 +24,37 @@ import BookingSuccess from './components/pages/booking-success';
 import Doctor_profile_settings from './components/pages/doctor_profile_settings';
 import Patient_Dashboard from './components/pages/partient_dashboard';
 import Social_Media from './components/pages/social_media';
+import { useJwt } from 'react-jwt';
 
 
 function App() {
   const location = useLocation();
+  
+  // Check if the current path is /login
+  const isLoginPath = location.pathname === '/login';
+  const ProtectedRoute = ({ element }) => {
+    const token = localStorage.getItem("accessToken");
+    const { isExpired, isInvalid } = useJwt(token);
 
-  // const isHomeRoute = () => {
-  //   return location.pathname === '/', '/bookingsuccess';
-  // };
+    if (!token || isExpired || isInvalid) {
+      window.alert('You have to login first')
+        localStorage.removeItem("accessToken");
+        return <Navigate to="/login" />;
+    }
+
+    return element;
+};
+
+const ProtectedLoginRoute = ({ element }) => {
+    const token = localStorage.getItem("accessToken");
+    const { isExpired, isInvalid } = useJwt(token);
+
+    if (token && !isExpired && !isInvalid) {
+        return <Navigate to="/" />;
+    }
+
+    return element;
+};
   return (
     <div className="App">
       <div id="loader">
@@ -45,23 +68,24 @@ function App() {
         <BreadCrumb currentLocation={location.pathname} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/booking/:id' element={<Booking />} />
+          <Route path='/booking/:id' element={<ProtectedRoute element={<Booking />}/>} />
           <Route path='/prescription_details' element={<Prescription_details />} />
           <Route path='/404' element={<Error404 />} />
           <Route path='/blog_details' element={<Blog_details />} />
           <Route path='/product_description' element={<Product_description />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/aboutus' element={<AboutUs />} />
-          <Route path='/invoice' element={<Invoice />} />
-          <Route path='/detailinvoice' element={<DetailInvoice />} />
+          <Route path='/invoice' element={<ProtectedRoute element={<Invoice />}/>} />
+          <Route path='/detailinvoice' element={<ProtectedRoute element={<DetailInvoice />}/>} />
           <Route path='/department' element={<Department />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/checkout' element={<CheckOut />} />
-          <Route path='/booking-success/:id' element={<BookingSuccess />} />
+          <Route path='/login' element={<ProtectedLoginRoute element={<Login />} />} />
+          <Route path='/register' element={<ProtectedLoginRoute element={<Register />} />} />
+          <Route path='/checkout' element={<ProtectedRoute element={<CheckOut />}/>} />
+          <Route path='/booking-success/:id' element={<ProtectedRoute element={<BookingSuccess />}/>} />
           <Route path='/doctor_profile_settings' element={<Doctor_profile_settings />} />
           <Route path='/partient_dashboard' element={<Patient_Dashboard />} />
           <Route path='/social_media' element={<Social_Media />} />
+          <Route path='/partient_dashboard' element={<ProtectedRoute element={<Patient_Dashboard />}/>} />
         </Routes>
         <Footer></Footer>
         <div className="mouse-cursor cursor-outer"></div>
