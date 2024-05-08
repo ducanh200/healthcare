@@ -52,11 +52,7 @@ function Department() {
 </div>
 </div>
 <div className="doc-info-right">
-<div className="clini-infos">
-<ul>
-<li><i className="far fa-money-bill-alt"></i> ${department.expense} <i className="fas fa-info-circle" data-bs-toggle="tooltip" title="Lorem Ipsum"></i> </li>
-</ul>
-</div>
+
 <div className="clinic-booking">
 <a className="view-pro-btn" href="doctor-profile.html">View Profile</a>
 <a className="apt-btn" onClick={() => handleClick(department.id)}>Book Appointment</a>
