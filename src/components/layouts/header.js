@@ -67,9 +67,6 @@ fetchDoctorProfile();
                         <a style={{marginRight:"10px"}} href="/">Home</a>
                     </li>
                     <li className="has-submenu megamenu active">
-                        <a style={{marginRight:"10px"}} href="/blog_details">Blog</a>
-                    </li>
-                    <li className="has-submenu megamenu active">
                         <a style={{marginRight:"10px"}} href="/department">Booking Now</a>
                     </li>
                     <li className="has-submenu megamenu active">

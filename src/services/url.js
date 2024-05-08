@@ -15,6 +15,9 @@ const url ={
     BOOKING:{
         CREATE:"/bookings",
         LIST:"/bookings"
-    }
+    },
+    INVOICE:{
+        LIST:"/results",
+    },
 }
 export default url;

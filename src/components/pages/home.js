@@ -1,27 +1,27 @@
 import Home_department from "./home/home_department";
 import Home_doctor from "./home/home_doctor";
 
-function Home(){
-    return(
+function Home() {
+    return (
         <div>
             <section class="banner-section">
-                <div class="container" style={{textAlign: "justify"}}>
+                <div class="container" style={{ textAlign: "justify" }}>
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="banner-content aos" data-aos="fade-up">
                                 <h1>Consult <span>Best Doctors</span> Your Nearby Location.</h1>
-                                <img src="assets/img/icons/header-icon.svg" class="header-icon" alt="header-icon"/>
+                                <img src="assets/img/icons/header-icon.svg" class="header-icon" alt="header-icon" />
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-                                <a href="/department" class="btn" style={{marginRight: "450px"}}>Start a Consult</a>
+                                <a href="/department" class="btn" style={{ marginRight: "450px" }}>Start a Consult</a>
                                 <div class="banner-arrow-img">
-                                    <img src="assets/img/down-arrow-img.png" class="img-fluid" alt="down-arrow"/>
+                                    <img src="assets/img/down-arrow-img.png" class="img-fluid" alt="down-arrow" />
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="col-lg-6">
                             <div class="banner-img aos" data-aos="fade-up">
-                                <img src="assets/img/banner-img.png" class="img-fluid" alt="patient-image"/>
+                                <img src="assets/img/banner-img.png" class="img-fluid" alt="patient-image" />
 
                             </div>
                         </div>
@@ -31,7 +31,7 @@ function Home(){
             <Home_department></Home_department>
             <Home_doctor></Home_doctor>
             <section class="pricing-section">
-                <div class="container" style={{textAlign: "justify"}}>
+                <div class="container" style={{ textAlign: "justify" }}>
                     <div class="row">
                         <div class="col-md-12 text-center aos" data-aos="fade-up">
                             <div class="section-header-one">
@@ -47,7 +47,7 @@ function Home(){
                                         <div class="pricing-header-info">
                                             <div class="pricing-icon">
                                                 <span>
-                                                    <img src="assets/img/icons/price-icon1.svg" alt="icon"/>
+                                                    <img src="assets/img/icons/price-icon1.svg" alt="icon" />
                                                 </span>
                                             </div>
                                             <div class="pricing-title">
@@ -86,7 +86,7 @@ function Home(){
                                         <div class="pricing-header-info">
                                             <div class="pricing-icon">
                                                 <span>
-                                                    <img src="assets/img/icons/price-icon1.svg" alt="icon"/>
+                                                    <img src="assets/img/icons/price-icon1.svg" alt="icon" />
                                                 </span>
                                             </div>
                                             <div class="pricing-title">
@@ -125,7 +125,7 @@ function Home(){
                                         <div class="pricing-header-info">
                                             <div class="pricing-icon">
                                                 <span>
-                                                    <img src="assets/img/icons/price-icon1.svg" alt="icon"/>
+                                                    <img src="assets/img/icons/price-icon1.svg" alt="icon" />
                                                 </span>
                                             </div>
                                             <div class="pricing-title">
@@ -161,11 +161,11 @@ function Home(){
                 </div>
             </section>
             <section class="work-section">
-                <div class="container" style={{textAlign: "justify"}}>
+                <div class="container" style={{ textAlign: "justify" }}>
                     <div class="row">
                         <div class="col-lg-4 col-md-12 work-img-info aos" data-aos="fade-up">
                             <div class="work-img">
-                                <img src="assets/img/work-img.png" class="img-fluid" alt="doctor-image"/>
+                                <img src="assets/img/work-img.png" class="img-fluid" alt="doctor-image" />
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-12 work-details">
@@ -177,7 +177,7 @@ function Home(){
                                 <div class="col-lg-6 col-md-6 aos" data-aos="fade-up">
                                     <div class="work-info">
                                         <div class="work-icon">
-                                            <span><img src="assets/img/icons/work-01.svg" alt="search-doctor-icon"/></span>
+                                            <span><img src="assets/img/icons/work-01.svg" alt="search-doctor-icon" /></span>
                                         </div>
                                         <div class="work-content">
                                             <h5>Search Doctor</h5>
@@ -188,7 +188,7 @@ function Home(){
                                 <div class="col-lg-6 col-md-6 aos" data-aos="fade-up">
                                     <div class="work-info">
                                         <div class="work-icon">
-                                            <span><img src="assets/img/icons/work-02.svg" alt="doctor-profile-icon"/></span>
+                                            <span><img src="assets/img/icons/work-02.svg" alt="doctor-profile-icon" /></span>
                                         </div>
                                         <div class="work-content">
                                             <h5>Check Doctor Profile</h5>
@@ -199,7 +199,7 @@ function Home(){
                                 <div class="col-lg-6 col-md-6 aos" data-aos="fade-up">
                                     <div class="work-info">
                                         <div class="work-icon">
-                                            <span><img src="assets/img/icons/work-03.svg" alt="calendar-icon"/></span>
+                                            <span><img src="assets/img/icons/work-03.svg" alt="calendar-icon" /></span>
                                         </div>
                                         <div class="work-content">
                                             <h5>Schedule Appointment</h5>
@@ -210,7 +210,7 @@ function Home(){
                                 <div class="col-lg-6 col-md-6 aos" data-aos="fade-up">
                                     <div class="work-info">
                                         <div class="work-icon">
-                                            <span><img src="assets/img/icons/work-04.svg" alt="solution-icon"/></span>
+                                            <span><img src="assets/img/icons/work-04.svg" alt="solution-icon" /></span>
                                         </div>
                                         <div class="work-content">
                                             <h5>Get Your Solution</h5>
@@ -224,7 +224,7 @@ function Home(){
                 </div>
             </section>
             <section class="articles-section">
-                <div class="container" style={{textAlign: "justify"}}>
+                <div class="container" style={{ textAlign: "justify" }}>
                     <div class="row">
                         <div class="col-md-12 aos" data-aos="fade-up">
                             <div class="section-header-one text-center">
@@ -239,7 +239,7 @@ function Home(){
                                     <div class="articles-left">
                                         <a href="blog-details.html">
                                             <div class="articles-img">
-                                                <img src="assets/img/blog/blog-11.jpg" class="img-fluid" alt="John Doe"/>
+                                                <img src="assets/img/blog/blog-11.jpg" class="img-fluid" alt="John Doe" />
                                             </div>
                                         </a>
                                     </div>
@@ -269,7 +269,7 @@ function Home(){
                                     <div class="articles-left">
                                         <a href="blog-details.html">
                                             <div class="articles-img">
-                                                <img src="assets/img/blog/blog-11.jpg" class="img-fluid" alt="John Doe"/>
+                                                <img src="assets/img/blog/blog-11.jpg" class="img-fluid" alt="John Doe" />
                                             </div>
                                         </a>
                                     </div>
@@ -299,7 +299,7 @@ function Home(){
                                     <div class="articles-left">
                                         <a href="blog-details.html">
                                             <div class="articles-img">
-                                                <img src="assets/img/blog/blog-11.jpg" class="img-fluid" alt="John Doe"/>
+                                                <img src="assets/img/blog/blog-11.jpg" class="img-fluid" alt="John Doe" />
                                             </div>
                                         </a>
                                     </div>
@@ -329,7 +329,7 @@ function Home(){
                                     <div class="articles-left">
                                         <a href="blog-details.html">
                                             <div class="articles-img">
-                                                <img src="assets/img/blog/blog-11.jpg" class="img-fluid" alt="John Doe"/>
+                                                <img src="assets/img/blog/blog-11.jpg" class="img-fluid" alt="John Doe" />
                                             </div>
                                         </a>
                                     </div>
@@ -357,7 +357,7 @@ function Home(){
                 </div>
             </section>
             <section class="app-section">
-                <div class="container" style={{textAlign: "justify"}}>
+                <div class="container" style={{ textAlign: "justify" }}>
                     <div class="app-bg">
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-12">
@@ -368,17 +368,17 @@ function Home(){
                                     </div>
                                     <div class="app-scan aos" data-aos="fade-up">
                                         <p>Scan the QR code to get the app now</p>
-                                        <img src="assets/img/scan-img.png" alt="scan-image"/>
+                                        <img src="assets/img/scan-img.png" alt="scan-image" />
                                     </div>
                                     <div class="google-imgs aos" data-aos="fade-up">
-                                        <a href="javascript:void(0);"><img src="assets/img/google-play.png" alt="Google Play"/></a>
-                                        <a href="javascript:void(0);"><img src="assets/img/app-store.png" alt="App Store"/></a>
+                                        <a href="javascript:void(0);"><img src="assets/img/google-play.png" alt="Google Play" /></a>
+                                        <a href="javascript:void(0);"><img src="assets/img/app-store.png" alt="App Store" /></a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 aos" data-aos="fade-up">
                                 <div class="mobile-img">
-                                    <img src="assets/img/mobile-img.png" class="img-fluid" alt="Mobile Phone"/>
+                                    <img src="assets/img/mobile-img.png" class="img-fluid" alt="Mobile Phone" />
                                 </div>
                             </div>
                         </div>
@@ -386,7 +386,7 @@ function Home(){
                 </div>
             </section>
             <section class="faq-section">
-                <div class="container" style={{textAlign: "justify"}}>
+                <div class="container" style={{ textAlign: "justify" }}>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="section-header-one text-center aos" data-aos="fade-up">
@@ -398,10 +398,10 @@ function Home(){
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-12 aos" data-aos="fade-up">
                             <div class="faq-img">
-                                <img src="assets/img/faq-img.png" class="img-fluid" alt="img"/>
+                                <img src="assets/img/faq-img.png" class="img-fluid" alt="img" />
                                 <div class="faq-patients-count">
                                     <div class="faq-smile-img">
-                                        <img src="assets/img/icons/smiling-icon.svg" alt="icon"/>
+                                        <img src="assets/img/icons/smiling-icon.svg" alt="icon" />
                                     </div>
                                     <div class="faq-patients-content">
                                         <h4><span class="count-digit">95</span>k+</h4>
@@ -477,7 +477,7 @@ function Home(){
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">    
+                                    <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingFive">
                                             <a href="javascript:void(0);" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                                 Can I make an Appointment Online with White Plains Hospital Kendi?
@@ -500,14 +500,14 @@ function Home(){
                 </div>
             </section>
             <section class="testimonial-section">
-                <div class="container" style={{textAlign: "justify"}}>
+                <div class="container" style={{ textAlign: "justify" }}>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="testimonial-slider slick">
                                 <div class="testimonial-grid">
                                     <div class="testimonial-info">
                                         <div class="testimonial-img">
-                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe"/>
+                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe" />
                                         </div>
                                         <div class="testimonial-content">
                                             <div class="section-header section-inner-header testimonial-header">
@@ -526,7 +526,7 @@ function Home(){
                                 <div class="testimonial-grid">
                                     <div class="testimonial-info">
                                         <div class="testimonial-img">
-                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe"/>
+                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe" />
                                         </div>
                                         <div class="testimonial-content">
                                             <div class="section-header section-inner-header testimonial-header">
@@ -545,7 +545,7 @@ function Home(){
                                 <div class="testimonial-grid">
                                     <div class="testimonial-info">
                                         <div class="testimonial-img">
-                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe"/>
+                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe" />
                                         </div>
                                         <div class="testimonial-content">
                                             <div class="section-header section-inner-header testimonial-header">
@@ -564,7 +564,7 @@ function Home(){
                                 <div class="testimonial-grid">
                                     <div class="testimonial-info">
                                         <div class="testimonial-img">
-                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe"/>
+                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe" />
                                         </div>
                                         <div class="testimonial-content">
                                             <div class="section-header section-inner-header testimonial-header">
@@ -583,7 +583,7 @@ function Home(){
                                 <div class="testimonial-grid">
                                     <div class="testimonial-info">
                                         <div class="testimonial-img">
-                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe"/>
+                                            <img src="assets/img/clients/client-01.jpg" class="img-fluid" alt="John Doe" />
                                         </div>
                                         <div class="testimonial-content">
                                             <div class="section-header section-inner-header testimonial-header">
