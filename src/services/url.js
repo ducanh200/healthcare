@@ -3,14 +3,17 @@ const url ={
     PATIENT:{
         REGISTER:"/patients",
         LOGIN:"/patients/login",
-        PROFILE:"/patients/profile"
+        PROFILE:"/patients/profile",
+        GETBYID:"/patients/"
     },
     DEPARTMENT:{
         LIST: "/departments",
-        DETAIL:"/departments"
+        DETAIL:"/departments",
+        GETBYID:"/departments/"
     },
     SHIFT:{
-        LIST:"/shifts"
+        LIST:"/shifts",
+        GETBYID:"/shifts/"
     },
     BOOKING:{
         CREATE:"/bookings",
@@ -18,6 +21,11 @@ const url ={
     },
     INVOICE:{
         LIST:"/results",
+        GETBYID:"/results/findById"
+    },
+    DOCTOR:{
+        LIST:"/doctors",
+        GETBYID:"/doctors/"
     },
 }
 export default url;

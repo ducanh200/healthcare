@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import url from "../../services/url";
 
 function Invoice() {
+  const navigate = useNavigate();
   const [listinvoice, setListinvoice] = useState([]);
 
-    useEffect(() => {
-        const loadListinvoice = async () => {
-            try {
-                const rs = await api.get(url.INVOICE.LIST);
-                setListinvoice(rs.data);
-            } catch (error) {
-                console.error("Error loading list invoice:", error);
-            }
-        };
-        loadListinvoice();
-    }, []);
+  useEffect(() => {
+    const loadListinvoice = async () => {
+      try {
+        const rs = await api.get(url.INVOICE.LIST);
+        setListinvoice(rs.data);
+      } catch (error) {
+        console.error("Error loading list invoice:", error);
+      }
+    };
+    loadListinvoice();
+  }, []);
+
+  const handleClick = (invoiceId) => {
+    navigate(`/view_invoice/${invoiceId}`)
+    window.location.reload()
+};
+
   return (
     <div className="content">
       <div className="container" style={{ textAlign: "justify" }}>
@@ -34,18 +42,20 @@ function Invoice() {
                     </tr>
                   </thead>
                   <tbody>
-                  {listinvoice.map((invoice) => (
-                    <tr key={invoice.id}>
-                      <td style={{ width: '10%' }}>{invoice.id}</td>
-                      <td style={{ width: '20%' }}>{invoice.requestTest}</td>
-                      <td style={{ width: '10%' }}>{invoice.expense}</td>
-                      <td style={{ width: '50%' }}>{invoice.diagnoseEnd}</td>
-                      <td style={{ width: '10%' }}>
-                        <div className="table-action">
-                          <a href="/" className="btn btn-primary"><i className="far fa-eye"></i> View</a>
-                        </div>
-                      </td>
-                    </tr>
+                    {listinvoice.map((invoice) => (
+                      <tr key={invoice.id}>
+                        <td style={{ width: '10%' }}>{invoice.id}</td>
+                        <td style={{ width: '20%' }}>{invoice.requestTest}</td>
+                        <td style={{ width: '10%' }}>{invoice.expense}</td>
+                        <td style={{ width: '50%' }}>{invoice.diagnoseEnd}</td>
+                        <td style={{ width: '10%' }}>
+                          <div className="table-action">
+                            <button className="btn btn-primary" onClick={() => handleClick(invoice.id)}>
+                              <i className="far fa-eye"></i> View
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
