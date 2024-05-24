@@ -36,6 +36,10 @@ fetchDoctorProfile();
   const location = useLocation();
   // Check if the current path is '/'
   const isHomePage = location.pathname === '/';
+  const handleClick = () => {
+    navigate(`/profile_patient`);
+    window.location.reload();
+};
     
     return(
         <header className="header header-custom header-fixed header-one">
@@ -94,8 +98,7 @@ fetchDoctorProfile();
                             <a href="login.html">Login / Signup</a>
                         </li>
                         <li className="register-btn">
-                            <span className="btn log-btn">Welcome, {customerName}</span>
-                        </li>
+                        <span onClick={handleClick} className="btn log-btn">Welcome, {customerName}</span>                        </li>
                         <li className="register-btn">
                         <a href="login" onClick={handleLogout} className="btn btn-danger"><i className="fa-solid fa-arrow-left"></i>Logout</a>
                         </li>

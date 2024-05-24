@@ -49,6 +49,9 @@ function BreadCrumb({ currentLocation }) {
     case '/view_invoice':
       breadcrumbName = 'View Invoice';
       break;
+      case '/profile_patient':
+      breadcrumbName = 'Profile';
+      break;
   }
 
   return (
