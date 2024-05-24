@@ -94,7 +94,7 @@ fetchDoctorProfile();
                             <a href="login.html">Login / Signup</a>
                         </li>
                         <li className="register-btn">
-                            <span className="btn log-btn">Welcome, {customerName}</span>
+                        <Link to="/profile_patient" className="btn log-btn">Welcome, {customerName}</Link>
                         </li>
                         <li className="register-btn">
                         <a href="login" onClick={handleLogout} className="btn btn-danger"><i className="fa-solid fa-arrow-left"></i>Logout</a>
