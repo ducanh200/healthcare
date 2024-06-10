@@ -4,7 +4,8 @@ const url ={
         REGISTER:"/patients",
         LOGIN:"/patients/login",
         PROFILE:"/patients/profile",
-        GETBYID:"/patients/"
+        GETBYID:"/patients/",
+        EDIT:"/patients/"
     },
     DEPARTMENT:{
         LIST: "/departments",
