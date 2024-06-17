@@ -14,7 +14,7 @@ function View_invoice() {
     useEffect(() => {
         const loadListinvoice = async () => {
             try {
-                const rs = await api.get(`${url.INVOICE.GETBYID}/${id}`);
+                const rs = await api.get(`${url.RESULTS.GETBYID}/${id}`);
                 setListinvoice(rs.data);
             } catch (error) {
                 console.error("Error loading infomation invoice:", error);

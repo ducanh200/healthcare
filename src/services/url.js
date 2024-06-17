@@ -17,11 +17,13 @@ const url ={
     },
     BOOKING:{
         CREATE:"/bookings",
-        LIST:"/bookings"
+        LIST:"/bookings",
+        GETBYID:"/bookings"
     },
-    INVOICE:{
-        LIST:"/results",
-        GETBYID:"/results/findById"
+    RESULTS:{
+        BOOKINGSUCCESS:"/results/bookingSuccess",
+        GETBYID:"/results/findById",
+        GETBOOKINGID:"/results/GetByBookingId"
     },
     DOCTOR:{
         LIST:"/doctors",
