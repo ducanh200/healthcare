@@ -6,10 +6,10 @@ import url from "../../services/url";
 function View_invoice() {
     const { id } = useParams();
     const [listinvoice, setListinvoice] = useState([]);
-    const [listshift, setShift] = useState({});
     const [listdepartment, setDepartment] = useState({});
     const [listdoctor, setDoctor] = useState({});
-    const [listpatient, setPatient] = useState({});
+    const [listtest, setTest] = useState({});
+    const [listdevice, setDevice] = useState({});
 
     useEffect(() => {
         const loadListinvoice = async () => {
@@ -24,27 +24,13 @@ function View_invoice() {
     }, [id]);
 
     const doctor = listinvoice?.doctor || {};
-    
-    const shiftID = listinvoice?.booking?.shiftId
-
-    useEffect(() => {
-        const loadShift = async () => {
-            try {
-                const rs = await api.get(url.SHIFT.GETBYID+shiftID);
-                setShift(rs.data);
-            } catch (error) {
-                console.error("Error loading infomation shift:", error);
-            }
-        };
-        loadShift();
-    }, [shiftID]);
 
     const departmentId = listinvoice?.booking?.departmentId
 
     useEffect(() => {
         const loadDepartment = async () => {
             try {
-                const rs = await api.get(url.DEPARTMENT.GETBYID+departmentId);
+                const rs = await api.get(url.DEPARTMENT.GETBYID + departmentId);
                 setDepartment(rs.data);
             } catch (error) {
                 console.error("Error loading infomation department:", error);
@@ -58,7 +44,7 @@ function View_invoice() {
     useEffect(() => {
         const loadDoctor = async () => {
             try {
-                const rs = await api.get(url.DOCTOR.GETBYID+doctorId);
+                const rs = await api.get(url.DOCTOR.GETBYID + doctorId);
                 setDoctor(rs.data);
             } catch (error) {
                 console.error("Error loading infomation doctor:", error);
@@ -67,19 +53,18 @@ function View_invoice() {
         loadDoctor();
     }, [doctorId]);
 
-    const patientId = listinvoice?.booking?.patientId
-
     useEffect(() => {
-        const loadPatient = async () => {
+        const loadTest = async () => {
             try {
-                const rs = await api.get(url.PATIENT.GETBYID+patientId);
-                setPatient(rs.data);
+                const rs = await api.get(url.TEST.LIST);
+                const filteredTests = rs.data.filter(test => test.resultId == id);
+                setTest(filteredTests);
             } catch (error) {
-                console.error("Error loading infomation patient:", error);
+                console.error("Error loading list test:", error);
             }
         };
-        loadPatient();
-    }, [patientId]);
+        loadTest();
+    }, [id]);
 
     return (
         <div class="content">
@@ -87,13 +72,14 @@ function View_invoice() {
                 <div class="row">
                     <div class="col-md-5 col-lg-4 col-xl-3 ">
                         <div class="profile-sidebar">
-                            <div class="widget-profile pro-widget-content">
+                            <div class="widget-profile pro-widget-content" style={{ height: "250px" }}>
                                 <div className="profile-info-widget">
                                     <a href="#" className="booking-doc-img">
                                         <img src={listdoctor?.thumbnail} alt="Doctor Image" />
                                     </a>
                                     <div className="profile-det-info">
                                         <h3>{listdoctor?.name}</h3>
+                                        <h7>{listdepartment?.name}</h7>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +87,7 @@ function View_invoice() {
                     </div>
                     <div class="col-md-7 col-lg-8 col-xl-9">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" style={{ height: "250px" }}>
                                 <h4 class="card-title">Infomation Results</h4>
                                 <table class="table">
                                     <tbody>
@@ -118,95 +104,45 @@ function View_invoice() {
                                             <td style={{ width: "70%" }}>{listinvoice?.diagnoseEnd}</td>
                                         </tr>
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Infomation Doctor</h4>
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Name</th>
-                                            <td style={{ width: "70%" }}>{listdoctor?.name}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Email</th>
-                                            <td style={{ width: "70%" }}>{listdoctor?.email}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Phone</th>
-                                            <td style={{ width: "70%" }}>{listdoctor?.phonenumber}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Department</th>
-                                            <td style={{ width: "70%" }}>{listdepartment?.name}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Infomation Patient</h4>
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Name</th>
-                                            <td style={{ width: "70%" }}>{listpatient?.name}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Gender</th>
-                                            <td style={{ width: "70%" }}>{listpatient?.gender}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Birthday</th>
-                                            <td style={{ width: "70%" }}>{listpatient?.birthday}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Email</th>
-                                            <td style={{ width: "70%" }}>{listpatient?.email}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Phone</th>
-                                            <td style={{ width: "70%" }}>{listpatient?.phonenumber}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Address</th>
-                                            <td style={{ width: "70%" }}>{listpatient?.address}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>City</th>
-                                            <td style={{ width: "70%" }}>{listpatient?.city}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Infomation Booking</h4>
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Date</th>
-                                            <td style={{ width: "70%" }}>{listinvoice?.booking?.date}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Time</th>
-                                            <td style={{ width: "70%" }}>{listshift?.time}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Session</th>   
-                                            <td style={{ width: "70%" }}>{listshift?.session}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style={{ width: "30%" }}>Department</th>
-                                            <td style={{ width: "70%" }}>{listdepartment?.name}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    </div>
+                    <div class="col-12">
+                        <div className="card card-table">
+                            <div className="card-body">
+                                <div className="table-responsive">
+                                    <table className="table table-hover table-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Thumbnail</th>
+                                                <th>Diagnose</th>
+                                                <th>Device Name</th>
+                                                <th>Expense</th>
+                                                <th>Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {listtest.length > 0 ? (
+                                                listtest.map((test, index) => (
+                                                    <tr key={test.id}>
+                                                        <td style={{ width: "10%" }}>{index + 1}</td>
+                                                        <td style={{ width: "15%" }}><img style={{ width: "100px", height: "100px" }} src={test.thumbnail} /></td>
+                                                        <td style={{ width: "30%" }}>{test.diagnose}</td>
+                                                        <td style={{ width: "20%" }}>{test.device.name}</td>
+                                                        <td style={{ width: "10%" }}>{test.expense}</td>
+                                                        <td style={{ width: "15%" }}>{test.testAt}</td>
+                                                    </tr>
+                                                ))
+                                            ) : (
+                                                <tr>
+                                                    <td colSpan="6" style={{ textAlign: 'center' }}>No tests found</td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="submit-section submit-btn-bottom">
