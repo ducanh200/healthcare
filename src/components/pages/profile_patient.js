@@ -76,7 +76,7 @@ function Profile_Patient() {
     setEditCity(profile.city || '');
   }, [profile]);
   const formatDate = (dateString) => {
-    if (!dateString) return 'loading...';
+    if (!dateString) return '...';
     const date = new Date(dateString);
     return date.toLocaleDateString('vi-VN'); 
   };
@@ -92,7 +92,7 @@ function Profile_Patient() {
                     <img src="https://tse1.mm.bing.net/th?id=OIP.xyVi_Y3F3YwEIKzQm_j_jQHaHa&pid=Api&P=0&h=180" alt="User Image" />
                   </a>
                   <div className="profile-det-info">
-                    <h3>{profile.name || 'Loading...'}</h3>
+                    <h3>{profile.name || '...'}</h3>
                   </div>
                 </div>
               </div>
@@ -108,31 +108,31 @@ function Profile_Patient() {
                       <tbody>
                         <tr>
                           <th scope="row" style={{ width: "30%" }}>Name</th>
-                          <td style={{ width: "70%" }}>{profile.name || 'Loading...'}</td>
+                          <td style={{ width: "70%" }}>{profile.name || '...'}</td>
                         </tr>
                         <tr>
                           <th scope="row" style={{ width: "30%" }}>Email</th>
-                          <td style={{ width: "70%" }}>{profile.email || 'Loading...'}</td>
+                          <td style={{ width: "70%" }}>{profile.email || '...'}</td>
                         </tr>
                         <tr>
                           <th scope="row" style={{ width: "30%" }}>Gender</th>
-                          <td style={{ width: "70%" }}>{profile.gender || 'Loading...'}</td>
+                          <td style={{ width: "70%" }}>{profile.gender || '...'}</td>
                         </tr>
                         <tr>
                           <th scope="row" style={{ width: "30%" }}>Date of Birth</th>
-                          <td style={{ width: "70%" }}>{formatDate(profile.birthday) || 'Loading...'}</td>
+                          <td style={{ width: "70%" }}>{formatDate(profile.birthday) || '...'}</td>
                         </tr>
                         <tr>
                           <th scope="row" style={{ width: "30%" }}>Phone Number</th>
-                          <td style={{ width: "70%" }}>{profile.phonenumber || 'Loading...'}</td>
+                          <td style={{ width: "70%" }}>{profile.phonenumber || '...'}</td>
                         </tr>
                         <tr>
                           <th scope="row" style={{ width: "30%" }}>Address</th>
-                          <td style={{ width: "70%" }}>{profile.address || 'Loading...'}</td>
+                          <td style={{ width: "70%" }}>{profile.address || '...'}</td>
                         </tr>
                         <tr>
                           <th scope="row" style={{ width: "30%" }}>City</th>
-                          <td style={{ width: "70%" }}>{profile.city || 'Loading...'}</td>
+                          <td style={{ width: "70%" }}>{profile.city || '...'}</td>
                         </tr>
                       </tbody>
                     </table>
