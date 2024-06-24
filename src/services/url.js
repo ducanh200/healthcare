@@ -30,5 +30,8 @@ const url ={
         LIST:"/doctors",
         GETBYID:"/doctors/"
     },
+    TEST:{
+        LIST:"/tests"
+    },
 }
 export default url;

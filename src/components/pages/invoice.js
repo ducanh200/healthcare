@@ -9,9 +9,6 @@ function Invoice() {
   const [bookingId, setBookingId] = useState(null);
   const [booking, setBooking] = useState(null);
 
-
-  const [userInfo, setUserInfo] = useState(null);
-
   useEffect(() => {
     // Xác định thông tin người dùng
     const token = localStorage.getItem('accessToken');
@@ -21,32 +18,32 @@ function Invoice() {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(response => {
-        const userInfo = response.data; // Lấy thông tin người dùng từ response
-        if (userInfo && userInfo.id) { // Đảm bảo userInfo chứa thông tin id của người dùng
-          const patientId = userInfo.id; // Lấy patientId của người dùng từ userInfo
-  
-          // Lấy danh sách kết quả
-          api.get(url.RESULTS.BOOKINGSUCCESS)
-            .then(response => {
-              const results = response.data;
-  
-              // Lọc danh sách kết quả theo patientId
-              const filteredResults = results.filter(result => result.booking.patientId === patientId);
-  
-              // Lưu danh sách kết quả đã lọc vào state
-              setListinvoice(filteredResults);
-            })
-            .catch(error => {
-              console.error("Error fetching list of results:", error);
-            });
-        } else {
-          console.error("User info is missing or incomplete.");
-        }
-      })
-      .catch(error => {
-        console.error("Error fetching user info:", error);
-      });
+        .then(response => {
+          const userInfo = response.data; // Lấy thông tin người dùng từ response
+          if (userInfo && userInfo.id) { // Đảm bảo userInfo chứa thông tin id của người dùng
+            const patientId = userInfo.id; // Lấy patientId của người dùng từ userInfo
+
+            // Lấy danh sách kết quả
+            api.get(url.RESULTS.BOOKINGSUCCESS)
+              .then(response => {
+                const results = response.data;
+
+                // Lọc danh sách kết quả theo patientId
+                const filteredResults = results.filter(result => result.booking.patientId === patientId);
+
+                // Lưu danh sách kết quả đã lọc vào state
+                setListinvoice(filteredResults);
+              })
+              .catch(error => {
+                console.error("Error fetching list of results:", error);
+              });
+          } else {
+            console.error("User info is missing or incomplete.");
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching user info:", error);
+        });
     } else {
       console.error("Access token is missing.");
     }
@@ -57,7 +54,7 @@ function Invoice() {
       try {
         const rs = await api.get(url.RESULTS.BOOKINGSUCCESS);
         const filteredList = rs.data.filter(result => result.bookingId == bookingId);
-      setListinvoice(filteredList);
+        setListinvoice(filteredList);
       } catch (error) {
         console.error("Error loading list invoice:", error);
       }
@@ -66,7 +63,7 @@ function Invoice() {
   }, [bookingId]);
 
   useEffect(() => {
-    const loadBookingid= async () => {
+    const loadBookingid = async () => {
       try {
         const rs = await api.get(url.RESULTS.GETBOOKINGID);
         setBookingId(rs.data);
@@ -78,7 +75,7 @@ function Invoice() {
   }, []);
 
   useEffect(() => {
-    const loadBooking= async () => {
+    const loadBooking = async () => {
       try {
         const rs = await api.get(url.BOOKING.GETBYID);
         setBooking(rs.data);
@@ -92,7 +89,7 @@ function Invoice() {
   const handleClick = (invoiceId) => {
     navigate(`/view_invoice/${invoiceId}`)
     window.location.reload()
-};
+  };
 
   return (
     <div className="content">
@@ -108,25 +105,31 @@ function Invoice() {
                       <th>Request Test</th>
                       <th>Expense</th>
                       <th>Diagnose End</th>
-                      {/* <th>Action</th> */}
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {listinvoice.map((invoice, index) => (
-                      <tr key={invoice.id}>
-                        <td style={{ width: '10%' }}>{index + 1}</td>
-                        <td style={{ width: '20%' }}>{invoice.requestTest}</td>
-                        <td style={{ width: '10%' }}>{invoice.expense}</td>
-                        <td style={{ width: '50%' }}>{invoice.diagnoseEnd}</td>
-                        {/* <td style={{ width: '10%' }}>
-                          <div className="table-action">
-                            <button className="btn btn-primary" onClick={() => handleClick(invoice.id)}>
-                              <i className="far fa-eye"></i> View
-                            </button>
-                          </div>
-                        </td> */}
+                    {listinvoice.length > 0 ? (
+                      listinvoice.map((invoice, index) => (
+                        <tr key={invoice.id}>
+                          <td style={{ width: '10%' }}>{index + 1}</td>
+                          <td style={{ width: '20%' }}>{invoice.requestTest}</td>
+                          <td style={{ width: '10%' }}>{invoice.expense}</td>
+                          <td style={{ width: '50%' }}>{invoice.diagnoseEnd}</td>
+                          <td style={{ width: '10%' }}>
+                            <div className="table-action">
+                              <button className="btn btn-primary" onClick={() => handleClick(invoice.id)}>
+                                <i className="far fa-eye"></i> View
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="5" style={{ textAlign: 'center' }}>No invoices found</td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>
