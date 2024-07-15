@@ -27,6 +27,7 @@ function BookingSuccess() {
     thumbnail: '',
     description: '',
   });
+
   const fetchBookingData = async () => {
     try {
       const response = await api.get(url.BOOKING.LIST + `/${id}`);
@@ -39,44 +40,40 @@ function BookingSuccess() {
       console.error("Error fetching department data:", error);
     }
   };
+
   useEffect(() => {
     fetchBookingData();
-  }, []);
+  }, [id]);
+
   const generateGoogleCalendarLink = (date, time) => {
-    // Combine date and time strings into a single datetime string
-    const datetimeString = `${date}T${time}`;
-
-    // Create a Date object using the combined datetime string
-    const dateTime = new Date(datetimeString);
-
-    // Check if the Date object is valid
-    if (isNaN(dateTime.getTime())) {
+    // Parse the date and time into a Date object
+    const startDateTime = new Date(`${date}T${time}Z`); // Assuming UTC time
+    if (isNaN(startDateTime.getTime())) {
       console.error('Invalid date or time');
       return null;
     }
 
-    // Convert the Date object to ISO string
-    const isoString = dateTime.toISOString();
+    // Add 30 minutes to the start time
+    const endDateTime = new Date(startDateTime.getTime() + 30 * 60 * 1000);
 
-    // Generate Google Calendar link using the ISO string
-    const googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&dates=${isoString}`;
+    // Format the start and end times as 'YYYYMMDDTHHmmssZ'
+    const formattedStartDateTime = startDateTime.toISOString().replace(/[-:.]/g, '').slice(0, -1);
+    const formattedEndDateTime = endDateTime.toISOString().replace(/[-:.]/g, '').slice(0, -1);
+
+    // Generate Google Calendar link
+    const googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&dates=${formattedStartDateTime}/${formattedEndDateTime}&details=Doccure+Appointment&location=${department.name}&text=Appointment+with+${department.name}`;
 
     return googleCalendarLink;
   };
 
-  // Usage example
-  const date = '2024-05-04';
-  const timee = '08:00:00';
-  const googleCalendarLink = generateGoogleCalendarLink(date, timee);
-  console.log(googleCalendarLink);
+  const googleCalendarLink = generateGoogleCalendarLink(bookings.date, time.time);
+
 
   return (
     <div className="doctor-content">
       <div className="container">
-
         <div className="row">
-          <div className="col-md-12">      
-          </div>
+          <div className="col-md-12"></div>
         </div>
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-8">
@@ -84,34 +81,36 @@ function BookingSuccess() {
               <div className="success-icon">
                 <i className="fas fa-circle-check"></i>
               </div>
-              <h4>Your Appointment Booked Succesfully</h4>
+              <h4>Your Appointment Booked Successfully</h4>
             </div>
             <div className="card booking-card">
               <div className="card-body booking-card-body booking-list-body">
                 <div className="booking-doctor-left booking-success-info">
                   <div className="booking-doctor-img">
                     <a href="javascript:void(0);">
-                      <img src={department.thumbnail} alt="John Doe" className="img-fluid" />
+                      <img src={department.thumbnail} alt={department.name} className="img-fluid" />
                     </a>
                   </div>
                   <div className="booking-doctor-info">
                     <h4><a href="javascript:void(0);">{department.name}</a></h4>
                     <p>{department.description}</p>
-                    <div className="booking-doctor-location">
-                    </div>
+                    <div className="booking-doctor-location"></div>
                   </div>
                 </div>
                 <div className="booking-list">
                   <div className="booking-date-list consultation-date-list">
                     <ul>
-                      <li>Booking Date: <span>{bookings.date} </span></li>
-                      <li>Booking Time: <span>{time.time}</span></li>                    
+                      <li>Booking Date: <span>{bookings.date}</span></li>
+                      <li>Booking Time: <span>{time.time}</span></li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="success-btn">              
+            <div className="success-btn">
+              <a href={googleCalendarLink} className="btn btn-primary prime-btn">
+                Add to Google Calendar
+              </a>
             </div>
             <div className="success-dashboard-link">
               <a href="/">
@@ -120,9 +119,9 @@ function BookingSuccess() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
-  )
+  );
 }
+
 export default BookingSuccess;
