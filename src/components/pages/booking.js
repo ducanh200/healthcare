@@ -105,7 +105,7 @@ function Booking() {
     }
 
     const today = new Date();
-    const selectedDate = new Date(today.getTime() + (activeDay + 1) * 24 * 60 * 60 * 1000);
+    const selectedDate = new Date(today.getTime() + (activeDay + 1) * 24 * 60 * 60 * 1000 +7*60*60*1000);
 
     try {
       const selectedShift = shifts.find((shift) => shift.time == activeTiming);

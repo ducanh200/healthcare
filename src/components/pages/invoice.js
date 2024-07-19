@@ -5,92 +5,39 @@ import url from "../../services/url";
 
 function Invoice() {
   const navigate = useNavigate();
-  const [listinvoice, setListinvoice] = useState([]);
-  const [bookingId, setBookingId] = useState(null);
-  const [booking, setBooking] = useState(null);
-
+  const [listinvoice, setListInvoice] = useState([]);
+  const [patients, setPatients] = useState([]);
   useEffect(() => {
-    // Xác định thông tin người dùng
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      api.get(url.PATIENT.PROFILE, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then(response => {
-          const userInfo = response.data; // Lấy thông tin người dùng từ response
-          if (userInfo && userInfo.id) { // Đảm bảo userInfo chứa thông tin id của người dùng
-            const patientId = userInfo.id; // Lấy patientId của người dùng từ userInfo
+    const fetchInvoicesAndPatients = async () => {
+      try {
+        // Fetch the results
+        const resultsResponse = await api.get(url.RESULTS.BOOKINGSUCCESS);
+        const results = resultsResponse.data;
 
-            // Lấy danh sách kết quả
-            api.get(url.RESULTS.BOOKINGSUCCESS)
-              .then(response => {
-                const results = response.data;
+        // Fetch the patients
+        const patientsResponse = await api.get(url.PATIENT.REGISTER);
+        const patients = patientsResponse.data;
 
-                // Lọc danh sách kết quả theo patientId
-                const filteredResults = results.filter(result => result.booking.patientId === patientId);
-
-                // Lưu danh sách kết quả đã lọc vào state
-                setListinvoice(filteredResults);
-              })
-              .catch(error => {
-                console.error("Error fetching list of results:", error);
-              });
-          } else {
-            console.error("User info is missing or incomplete.");
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching user info:", error);
+        // Filter results to check if result.booking.patientId matches patient.id
+        const filteredResults = results.filter(result => {
+          const booking = result.booking;
+          return booking && patients.some(patient => patient.id === booking.patientId);
         });
-    } else {
-      console.error("Access token is missing.");
-    }
-  }, []);
 
-  useEffect(() => {
-    const loadListinvoice = async () => {
-      try {
-        const rs = await api.get(url.RESULTS.BOOKINGSUCCESS);
-        const filteredList = rs.data.filter(result => result.bookingId == bookingId);
-        setListinvoice(filteredList);
+        setListInvoice(filteredResults);
+        setPatients(patients);
       } catch (error) {
-        console.error("Error loading list invoice:", error);
+        console.error("Error fetching invoices and patients:", error);
       }
     };
-    loadListinvoice();
-  }, [bookingId]);
 
-  useEffect(() => {
-    const loadBookingid = async () => {
-      try {
-        const rs = await api.get(url.RESULTS.GETBOOKINGID);
-        setBookingId(rs.data);
-      } catch (error) {
-        console.error("Error loading list invoice:", error);
-      }
-    };
-    loadBookingid();
-  }, []);
-
-  useEffect(() => {
-    const loadBooking = async () => {
-      try {
-        const rs = await api.get(url.BOOKING.GETBYID);
-        setBooking(rs.data);
-      } catch (error) {
-        console.error("Error loading list invoice:", error);
-      }
-    };
-    loadBooking();
+    fetchInvoicesAndPatients();
   }, []);
 
   const handleClick = (invoiceId) => {
     navigate(`/view_invoice/${invoiceId}`)
     window.location.reload()
   };
-
   return (
     <div className="content">
       <div className="container" style={{ textAlign: "justify" }}>
