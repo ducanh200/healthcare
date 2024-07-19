@@ -33,5 +33,8 @@ const url ={
     TEST:{
         LIST:"/tests"
     },
+    EMAIL:{
+        SENT:"/send_email"
+    },
 }
 export default url;

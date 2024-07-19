@@ -76,7 +76,7 @@ function Booking() {
 
     try {
       const today = new Date();
-      const selectedDate = new Date(today.getTime() + (dayIndex + 1) * 24 * 60 * 60 * 1000);
+      const selectedDate = new Date(today.getTime() + (dayIndex + 1) * 24 * 60 * 60 * 1000 + 7*60*60*1000);
 
       const bookingsResponse = await api.get(url.BOOKING.LIST);
       const bookings = bookingsResponse.data;

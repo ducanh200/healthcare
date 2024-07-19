@@ -77,7 +77,39 @@ function CheckOut(){
     if (bookingsForSelectedTimeAndDate < departments.maxBooking) {
       // Make an HTTP POST request to your backend API endpoint
       const response = await api.post(url.BOOKING.CREATE, formData);
-
+      await api.post(url.EMAIL.SENT, {
+        to: patients.email,
+        subject: "Booking Confirmation",
+          message: `
+            <html>
+  <body style="font-family: Arial, sans-serif; color: black;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+      <h2 style="color: #0e82fd; text-align: center; margin-bottom: 20px;">Booking Confirmation</h2>
+      <p>Dear ${patients.name},</p>
+      <p style="margin-bottom: 20px;">Your booking has been successfully confirmed. Below are the details of your booking:</p>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <tr>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #f4f4f4;">Date</th>
+          <td style="border: 1px solid #ddd; padding: 12px;">${date}</td>
+        </tr>
+        <tr>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #f4f4f4;">Time</th>
+          <td style="border: 1px solid #ddd; padding: 12px;">${selectedTime}</td>
+        </tr>
+        <tr>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #f4f4f4;">Department</th>
+          <td style="border: 1px solid #ddd; padding: 12px;">${departments.name}</td>
+        </tr>
+      </table>
+      <p style="margin: 20px 0; font-size: 16px;">Thank you for choosing our service. We look forward to seeing you!</p>
+      <p style="margin: 20px 0; font-size: 16px;">Best regards,</p>
+      <p style="font-size: 16px;">Doccure</p>
+      <img src="https://doccure.dreamstechnologies.com/html/template/assets/img/logo.png" alt="User Image" />
+    </div>
+  </body>
+</html>
+`
+      });
       window.location.href = `/booking-success/${response.data.id}`;
       // Redirect to booking success page or handle success message
     }
