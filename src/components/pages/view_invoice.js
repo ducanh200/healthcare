@@ -117,7 +117,6 @@ function View_invoice() {
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Thumbnail</th>
-                                                <th>Diagnose</th>
                                                 <th>Device Name</th>
                                                 <th>Expense</th>
                                                 <th>Time</th>
@@ -129,7 +128,6 @@ function View_invoice() {
                                                     <tr key={test.id}>
                                                         <td style={{ width: "10%" }}>{index + 1}</td>
                                                         <td style={{ width: "15%" }}><img style={{ width: "100px", height: "100px" }} src={test.thumbnail} /></td>
-                                                        <td style={{ width: "30%" }}>{test.diagnose}</td>
                                                         <td style={{ width: "20%" }}>{test.device.name}</td>
                                                         <td style={{ width: "10%" }}>{test.expense}</td>
                                                         <td style={{ width: "15%" }}>{test.testAt}</td>
