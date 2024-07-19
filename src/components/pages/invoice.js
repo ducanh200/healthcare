@@ -84,9 +84,16 @@ function Invoice() {
   const handleBookingClick = (id) => {
     navigate(`/booking-success/${id}`);
   };
+
   const handleClick = (id) => {
     navigate(`/view_invoice/${id}`);
   };
+
+  // Combine and sort invoices and bookings
+  const combinedList = [
+    ...listinvoice.map(item => ({ ...item, type: 'invoice' })),
+    ...bookings.filter(booking => booking.status !== 4).map(item => ({ ...item, type: 'booking' }))
+  ].sort((a, b) => b.id - a.id);
 
   return (
     <div className="content">
@@ -108,52 +115,28 @@ function Invoice() {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* Display filtered invoices */}
-                    {listinvoice.length > 0 && (
-                      listinvoice
-                        .sort((a, b) => b.id - a.id)
-                        .map((invoice, index) => (
-                          <tr key={invoice.id}>
-                            <td style={{ width: '10%' }}>{index + 1}</td>
-                            <td style={{ width: '20%' }}>{invoice.booking.date}</td>
-                            <td style={{ width: '10%' }}>{invoice.expense}</td>
-                            <td style={{ width: '30%' }}>{invoice.diagnoseEnd}</td>
-                            <td style={{ width: '20%' }}>{invoice.shiftTime}</td>
-                            <td style={{ width: '20%' }}>{invoice.departmentName}</td>
-                            <td style={{ width: '10%' }}>
-                              <div className="table-action">
-                                <button className="btn btn-primary" onClick={() => handleClick(invoice.id)}>
-                                  <i className="far fa-eye"></i> View Result
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))
-                    )}
-                    {/* Display bookings where status != 4 */}
-                    {bookings.length > 0 && (
-                      bookings
-                        .filter(booking => booking.status !== 4)
-                        .map((booking, index) => (
-                          <tr key={booking.id}>
-                            <td style={{ width: '10%' }}>{index + 1}</td>
-                            <td style={{ width: '20%' }}>{booking.date}</td>
-                            <td style={{ width: '10%' }}>-</td>
-                            <td style={{ width: '30%' }}>-</td>
-                            <td style={{ width: '20%' }}>{shifts.find(shift => shift.id === booking.shiftId)?.time || 'Unknown'}</td>
-                            <td style={{ width: '20%' }}>{departments.find(department => department.id === booking.departmentId)?.name || 'Unknown'}</td>
-                            <td style={{ width: '10%' }}>
-                              <div className="table-action">
-                                <button className="btn btn-primary" onClick={() => handleBookingClick(booking.id)}>
-                                  <i className="far fa-eye"></i> View Booking
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))
-                    )}
-                    {/* No invoices or bookings found */}
-                    {listinvoice.length === 0 && bookings.length === 0 && (
+                    {combinedList.length > 0 ? (
+                      combinedList.map((item, index) => (
+                        <tr key={item.id}>
+                          <td style={{ width: '10%' }}>{index + 1}</td>
+                          <td style={{ width: '20%' }}>{item.date || item.booking.date}</td>
+                          <td style={{ width: '10%' }}>{item.expense || '-'}</td>
+                          <td style={{ width: '30%' }}>{item.diagnoseEnd || '-'}</td>
+                          <td style={{ width: '20%' }}>{item.shiftTime || shifts.find(shift => shift.id === item.shiftId)?.time || 'Unknown'}</td>
+                          <td style={{ width: '20%' }}>{item.departmentName || departments.find(department => department.id === item.departmentId)?.name || 'Unknown'}</td>
+                          <td style={{ width: '10%' }}>
+                            <div className="table-action">
+                              <button
+                                className="btn btn-primary"
+                                onClick={() => item.type === 'invoice' ? handleClick(item.id) : handleBookingClick(item.id)}
+                              >
+                                <i className="far fa-eye"></i> {item.type === 'invoice' ? 'View Result' : 'View Booking'}
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
                       <tr>
                         <td colSpan="7" style={{ textAlign: 'center' }}>No records found</td>
                       </tr>
