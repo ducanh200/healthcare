@@ -10,7 +10,7 @@ function View_invoice() {
     const [listdoctor, setDoctor] = useState({});
     const [listtest, setTest] = useState({});
     const [listdevice, setDevice] = useState({});
-
+    const [medicines, setMedicines] = useState([]);
     useEffect(() => {
         const loadListinvoice = async () => {
             try {
@@ -32,6 +32,9 @@ function View_invoice() {
             try {
                 const rs = await api.get(url.DEPARTMENT.GETBYID + departmentId);
                 setDepartment(rs.data);
+                const medicinesResponse = await api.get(url.RESULTMEDICINE.CREATE);
+                const filteredMedicines = medicinesResponse.data.filter(medicine => medicine.resultId == id);
+                setMedicines(filteredMedicines);
             } catch (error) {
                 console.error("Error loading infomation department:", error);
             }
@@ -142,7 +145,32 @@ function View_invoice() {
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                            </div>
+                        <div className="col-md-12">
+                                <div className="invoice-content">
+                                    <h3 className="table-title">Medicines</h3>
+                                    <div className="table-responsive">
+                                        <table className="invoice-table table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Medicine</th>
+                                                    <th className="text-center">Quantity</th>
+                                                    <th className="text-center">Note</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {medicines.map(medicine => (
+                                                    <tr key={medicine.id}>
+                                                        <td>{medicine.medicine?.name}</td>
+                                                        <td className="text-center">{medicine.quantity}</td>
+                                                        <td className="text-center">{medicine.description}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                </div>
                         <div class="submit-section submit-btn-bottom">
                             <a href="/invoice" class="btn btn-primary prime-btn">Back</a>
                         </div>

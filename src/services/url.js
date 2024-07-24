@@ -36,5 +36,10 @@ const url ={
     EMAIL:{
         SENT:"/send_email"
     },
+    RESULTMEDICINE:{
+        CREATE:"/result_medicine",
+        DETAIL:"/result_medicine/resultId/",
+        DELETE:"/result_medicine/"
+    },
 }
 export default url;
