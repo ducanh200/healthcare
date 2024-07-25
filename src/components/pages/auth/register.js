@@ -72,18 +72,19 @@ console.log(user.gender)
                                             <label className="focus-label">Email</label>
                                         </div>
                                         <div className="mb-3 form-focus">
-                                            <input onChange={handleChange} value={user.phonenumber} name="phonenumber" type="text" className="form-control floating"/>
+                                            <input onChange={handleChange} value={user.password} name="password" type="password" className="form-control floating"/>
+                                            <label className="focus-label">Password</label>
+                                        </div>
+                                        <div className="mb-3 form-focus">
+                                            <input onChange={handleChange} value={user.phonenumber} name="phonenumber" type="text" className="form-control floating" required/>
                                             <label className="focus-label">Mobile Number</label>
                                         </div>
+                                    
                                         <div className="mb-3 form-focus">
-                                            <input onChange={handleChange} value={user.password} name="password" type="password" className="form-control floating"/>
-                                            <label className="focus-label">Create Password</label>
-                                        </div>
-                                        <div className="mb-3 form-focus">
-                                            <input onChange={handleChange} value={user.birthday} name="birthday" type="date" className="form-control floating"/>
+                                            <input onChange={handleChange} value={user.birthday} style={{height:"70px"}} name="birthday" type="date" className="form-control floating"/>
                                             <label className="focus-label">Birthday</label>
                                         </div>
-                                        <div className="mb-3 form-focus">
+                                        <div className="mb-3 form-focus" style={{marginTop:'35px'}}>
                                             <select
                                                 onChange={handleChange}
                                                 value={user.gender}
@@ -96,11 +97,11 @@ console.log(user.gender)
                                             <label className="focus-label">Gender</label>
                                         </div>
                                         <div className="mb-3 form-focus">
-                                            <input onChange={handleChange} value={user.city} name="city" type="text" className="form-control floating"/>
+                                            <input onChange={handleChange} value={user.city} name="city" type="text" className="form-control floating" required/>
                                             <label className="focus-label">City</label>
                                         </div>
                                         <div className="mb-3 form-focus">
-                                            <input onChange={handleChange} value={user.address} name="address" type="text" className="form-control floating"/>
+                                            <input onChange={handleChange} value={user.address} name="address" type="text" className="form-control floating" required/>
                                             <label className="focus-label">Address</label>
                                         </div>
                                         <button className="btn btn-primary w-100 btn-lg login-btn" type="submit">Signup</button>
