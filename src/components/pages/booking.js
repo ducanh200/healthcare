@@ -130,7 +130,6 @@ function Booking() {
 
   const morningShifts = filterShiftsBySession("morning");
   const afternoonShifts = filterShiftsBySession("afternoon");
-  const eveningShifts = filterShiftsBySession("evening");
 
   return (
     <div className="content content-space">
@@ -152,7 +151,7 @@ function Booking() {
                   </ul>
                 </div>
                 <div className="row">
-                  <div className="col-lg-4 col-md-4">
+                  <div className="col-lg-6 col-md-6">
                     <div className="time-slot time-slot-blk">
                       <h4>Morning</h4>
                       <div className="time-slot-list">
@@ -168,16 +167,18 @@ function Booking() {
                               </a>
                             </li>
                           ))}
-                          <li>
-                            <div className="load-more-timings load-more-morning">
-                              <a href="javascript:void(0);">Load More</a>
-                            </div>
-                          </li>
+                          {morningShifts.length > 3 && (
+                            <li>
+                              <div className="load-more-timings load-more-morning">
+                                <a href="javascript:void(0);">Load More</a>
+                              </div>
+                            </li>
+                          )}
                         </ul>
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-4">
+                  <div className="col-lg-6 col-md-6">
                     <div className="time-slot time-slot-blk">
                       <h4>Afternoon</h4>
                       <div className="time-slot-list">
@@ -193,36 +194,13 @@ function Booking() {
                               </a>
                             </li>
                           ))}
-                          <li>
-                            <div className="load-more-timings load-more-afternoon">
-                              <a href="javascript:void(0);">Load More</a>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-4 col-md-4">
-                    <div className="time-slot time-slot-blk">
-                      <h4>Evening</h4>
-                      <div className="time-slot-list">
-                        <ul>
-                          {eveningShifts.map((shift, index) => (
-                            <li key={index} className={morningShifts.length > 3 && index > 2 ? "time-slot-open time-slot-evening" : ""}>
-                              <a
-                                className={`timing ${activeTiming === shift.time ? "active" : ""}`}
-                                href="javascript:void(0);"
-                                onClick={() => handleTimingClick(shift.time)}
-                              >
-                                <span><i className="feather-clock"></i> {shift.time}</span>
-                              </a>
+                          {afternoonShifts.length > 3 && (
+                            <li>
+                              <div className="load-more-timings load-more-afternoon">
+                                <a href="javascript:void(0);">Load More</a>
+                              </div>
                             </li>
-                          ))}
-                          <li>
-                            <div className="load-more-timings load-more-evening">
-                              <a href="javascript:void(0);">Load More</a>
-                            </div>
-                          </li>
+                          )}
                         </ul>
                       </div>
                     </div>
