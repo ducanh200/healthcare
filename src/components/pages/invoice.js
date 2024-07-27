@@ -92,7 +92,6 @@ function Invoice() {
   // Combine and sort invoices and bookings
   const combinedList = [
     ...listinvoice.map(item => ({ ...item, type: 'invoice' })),
-    ...bookings.filter(booking => booking.status !== 4).map(item => ({ ...item, type: 'booking' }))
   ].sort((a, b) => b.id - a.id);
 
   return (

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import url from "../../services/url";
 import { useParams } from "react-router-dom";
-
 function Booking() {
   const { id } = useParams();
   const [activeTiming, setActiveTiming] = useState(null);
@@ -12,12 +11,9 @@ function Booking() {
   const [dateList, setDateList] = useState([]); // Store the list of dates
   const [isBookingFull, setIsBookingFull] = useState(false); // State to store if booking is full
   const [shifts, setShifts] = useState([]); // State to store shifts data
-
   useEffect(() => {
     const today = new Date(); // Get today's date
-
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
     const dates = [];
     for (let i = 1; i <= 7; i++) {
       const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
@@ -29,22 +25,18 @@ function Booking() {
           {date.getDate()} {date.toLocaleString('en-us', { month: 'short' })}
         </>
       );
-
       dates.push(formattedDate);
     }
     setDateList(dates);
   }, []);
-
   const handleDayClick = (index) => {
     setActiveDay(index);
     checkBookingStatus(activeTiming, index);
   };
-
   const handleTimingClick = (timing) => {
     setActiveTiming(timing);
     checkBookingStatus(timing, activeDay);
   };
-
   const fetchShiftsData = async () => {
     try {
       const response = await api.get(url.SHIFT.LIST);
@@ -53,7 +45,6 @@ function Booking() {
       console.error("Error fetching shifts data:", error);
     }
   };
-
   const fetchDepartmentData = async () => {
     try {
       const response = await api.get(url.DEPARTMENT.DETAIL + `/${id}`);
@@ -62,38 +53,31 @@ function Booking() {
       console.error("Error fetching department data:", error);
     }
   };
-
   useEffect(() => {
     fetchShiftsData();
     fetchDepartmentData();
   }, []);
-
   const checkBookingStatus = async (timing, dayIndex) => {
     if (!timing || dayIndex === null) {
       setIsBookingFull(false);
       return;
     }
-
     try {
       const today = new Date();
       const selectedDate = new Date(today.getTime() + (dayIndex + 1) * 24 * 60 * 60 * 1000 + 7*60*60*1000);
-
       const bookingsResponse = await api.get(url.BOOKING.LIST);
       const bookings = bookingsResponse.data;
-
       const selectedShift = shifts.find((shift) => shift.time === timing);
       if (selectedShift) {
         const bookingsForSelectedTimeAndDate = bookings.filter((booking) => {
           return booking.shiftId == selectedShift.id && booking.date == selectedDate.toISOString().split('T')[0] && booking.departmentId == id;
         }).length;
-
         setIsBookingFull(bookingsForSelectedTimeAndDate >= departmentData.maxBooking);
       }
     } catch (error) {
       console.error("Error fetching bookings data:", error);
     }
   };
-
   const handleNextClick = async () => {
     if (!activeTiming) {
       alert("Please select a time before proceeding.");
@@ -103,10 +87,8 @@ function Booking() {
       alert("This room has been fully booked.");
       return;
     }
-
     const today = new Date();
     const selectedDate = new Date(today.getTime() + (activeDay + 1) * 24 * 60 * 60 * 1000 +7*60*60*1000);
-
     try {
       const selectedShift = shifts.find((shift) => shift.time == activeTiming);
       if (selectedShift) {
@@ -123,13 +105,13 @@ function Booking() {
       console.error("Error during booking process:", error);
     }
   };
-
   const filterShiftsBySession = (session) => {
     return shifts.filter(shift => shift.session.toLowerCase() == session);
   };
 
   const morningShifts = filterShiftsBySession("morning");
   const afternoonShifts = filterShiftsBySession("afternoon");
+  const eveningShifts = filterShiftsBySession("evening");
 
   return (
     <div className="content content-space">
@@ -151,7 +133,7 @@ function Booking() {
                   </ul>
                 </div>
                 <div className="row">
-                  <div className="col-lg-6 col-md-6">
+                  <div className="col-lg-4 col-md-4">
                     <div className="time-slot time-slot-blk">
                       <h4>Morning</h4>
                       <div className="time-slot-list">
@@ -167,18 +149,16 @@ function Booking() {
                               </a>
                             </li>
                           ))}
-                          {morningShifts.length > 3 && (
-                            <li>
-                              <div className="load-more-timings load-more-morning">
-                                <a href="javascript:void(0);">Load More</a>
-                              </div>
-                            </li>
-                          )}
+                          <li>
+                            <div className="load-more-timings load-more-morning">
+                              <a href="javascript:void(0);">Load More</a>
+                            </div>
+                          </li>
                         </ul>
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-6 col-md-6">
+                  <div className="col-lg-4 col-md-4">
                     <div className="time-slot time-slot-blk">
                       <h4>Afternoon</h4>
                       <div className="time-slot-list">
@@ -194,13 +174,36 @@ function Booking() {
                               </a>
                             </li>
                           ))}
-                          {afternoonShifts.length > 3 && (
-                            <li>
-                              <div className="load-more-timings load-more-afternoon">
-                                <a href="javascript:void(0);">Load More</a>
-                              </div>
+                          <li>
+                            <div className="load-more-timings load-more-afternoon">
+                              <a href="javascript:void(0);">Load More</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-4 col-md-4">
+                    <div className="time-slot time-slot-blk">
+                      <h4>Evening</h4>
+                      <div className="time-slot-list">
+                        <ul>
+                          {eveningShifts.map((shift, index) => (
+                            <li key={index} className={morningShifts.length > 3 && index > 2 ? "time-slot-open time-slot-evening" : ""}>
+                              <a
+                                className={`timing ${activeTiming === shift.time ? "active" : ""}`}
+                                href="javascript:void(0);"
+                                onClick={() => handleTimingClick(shift.time)}
+                              >
+                                <span><i className="feather-clock"></i> {shift.time}</span>
+                              </a>
                             </li>
-                          )}
+                          ))}
+                          <li>
+                            <div className="load-more-timings load-more-evening">
+                              <a href="javascript:void(0);">Load More</a>
+                            </div>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -264,5 +267,4 @@ function Booking() {
     </div>
   );
 }
-
 export default Booking;
