@@ -28,7 +28,7 @@ function Invoice() {
         const patients = patientsResponse.data;
 
         // Fetch the shifts
-        const shiftsResponse = await api.get(url.SHIFT.DETAIL);
+        const shiftsResponse = await api.get(url.SHIFT.LIST);
         const shifts = shiftsResponse.data;
 
         // Fetch the departments

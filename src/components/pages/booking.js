@@ -47,7 +47,7 @@ function Booking() {
 
   const fetchShiftsData = async (selectedDate, id) => {
     try {
-      const response = await api.get(`${url.SHIFT.LIST}?date=${selectedDate}&departmentId=${id}`);
+      const response = await api.get(`${url.SHIFT.DETAIL}?date=${selectedDate}&departmentId=${id}`);
       setShifts(response.data);
       console.log(response); // Set the shifts data in state
     } catch (error) {

@@ -7,6 +7,39 @@ function CheckOut(){
   const shiftId = localStorage.getItem("selectedShiftId");
   const id = localStorage.getItem("departmentId");
   const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
+  const [isLoading, setIsLoading] = useState(false);
+
+    const loaderStyle = `
+    .loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid  #0356fd; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  `;
     const [patients,setPatients]=useState({
         id:0,
         name:'',
@@ -66,6 +99,7 @@ function CheckOut(){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const bookingsResponse = await api.get(url.BOOKING.LIST);
     const bookings = bookingsResponse.data; // Assuming the bookings data is stored in the data property
@@ -110,6 +144,7 @@ function CheckOut(){
 </html>
 `
       });
+      setIsLoading(false);
       window.location.href = `/booking-success/${response.data.id}`;
       // Redirect to booking success page or handle success message
     }
@@ -202,6 +237,13 @@ function CheckOut(){
 </div>
 </div>
 </div>
+<style>{loaderStyle}</style>
+            {isLoading && (
+            <div className="overlay">
+      <style dangerouslySetInnerHTML={{ __html: loaderStyle }} />
+      <div className="loader"></div>
+    </div>
+    )}
 </div>
     )
 }

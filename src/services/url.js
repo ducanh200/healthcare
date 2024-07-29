@@ -13,8 +13,8 @@ const url ={
         GETBYID:"/departments/"
     },
     SHIFT:{
-        DETAIL:"/shifts",
-        LIST:"/shifts/available",
+        DETAIL:"/shifts/available",
+        LIST:"/shifts",
         GETBYID:"/shifts/"
     },
     BOOKING:{
