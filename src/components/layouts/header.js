@@ -82,6 +82,9 @@ fetchDoctorProfile();
                     <li className="has-submenu megamenu active">
                         <a style={{marginRight:"10px"}} href="/invoice">Invoice</a>
                     </li>
+                    <li className="has-submenu megamenu active">
+                        <a style={{marginRight:"10px"}} href="/listbooking">List Booking</a>
+                    </li>
                     <li className="searchbar">
                         <div className="togglesearch">
                         <form action="https://doccure.dreamstechnologies.com/html/template/search.html">
