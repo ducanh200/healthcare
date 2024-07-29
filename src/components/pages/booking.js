@@ -10,7 +10,6 @@ function Booking() {
   const [departmentData, setDepartmentData] = useState(null); // State to store department data
   const [activeDay, setActiveDay] = useState(0); // Initialize active day as 0 (for today)
   const [dateList, setDateList] = useState([]); // Store the list of dates
-  const [isBookingFull, setIsBookingFull] = useState(false); // State to store if booking is full
   const [shifts, setShifts] = useState([]); // State to store shifts data
 
   useEffect(() => {
@@ -37,18 +36,20 @@ function Booking() {
 
   const handleDayClick = (index) => {
     setActiveDay(index);
-    checkBookingStatus(activeTiming, index);
+    const today = new Date();
+    const selectedDate = new Date(today.getTime() + (index + 1) * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    fetchShiftsData(selectedDate, id); // Fetch shifts data for  the selected date and department id
   };
 
   const handleTimingClick = (timing) => {
     setActiveTiming(timing);
-    checkBookingStatus(timing, activeDay);
   };
 
-  const fetchShiftsData = async () => {
+  const fetchShiftsData = async (selectedDate, id) => {
     try {
-      const response = await api.get(url.SHIFT.LIST);
-      setShifts(response.data); // Set the shifts data in state
+      const response = await api.get(`${url.SHIFT.LIST}?date=${selectedDate}&departmentId=${id}`);
+      setShifts(response.data);
+      console.log(response); // Set the shifts data in state
     } catch (error) {
       console.error("Error fetching shifts data:", error);
     }
@@ -64,51 +65,30 @@ function Booking() {
   };
 
   useEffect(() => {
-    fetchShiftsData();
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1); 
+    const formattedTomorrow = tomorrow.toISOString().split('T')[0];
+    fetchShiftsData(formattedTomorrow, id);
     fetchDepartmentData();
-  }, []);
-
-  const checkBookingStatus = async (timing, dayIndex) => {
-    if (!timing || dayIndex === null) {
-      setIsBookingFull(false);
-      return;
-    }
-
-    try {
-      const today = new Date();
-      const selectedDate = new Date(today.getTime() + (dayIndex + 1) * 24 * 60 * 60 * 1000 + 7*60*60*1000);
-
-      const bookingsResponse = await api.get(url.BOOKING.LIST);
-      const bookings = bookingsResponse.data;
-
-      const selectedShift = shifts.find((shift) => shift.time === timing);
-      if (selectedShift) {
-        const bookingsForSelectedTimeAndDate = bookings.filter((booking) => {
-          return booking.shiftId == selectedShift.id && booking.date == selectedDate.toISOString().split('T')[0] && booking.departmentId == id;
-        }).length;
-
-        setIsBookingFull(bookingsForSelectedTimeAndDate >= departmentData.maxBooking);
-      }
-    } catch (error) {
-      console.error("Error fetching bookings data:", error);
-    }
-  };
+  }, [id]);
 
   const handleNextClick = async () => {
     if (!activeTiming) {
       alert("Please select a time before proceeding.");
       return;
     }
-    if (isBookingFull) {
-      alert("This room has been fully booked.");
+  
+    const selectedShift = shifts.find((shift) => shift.time === activeTiming);
+  
+    if (selectedShift.status === 1) {
+      alert("The selected shift is not available.");
       return;
     }
-
+  
     const today = new Date();
-    const selectedDate = new Date(today.getTime() + (activeDay + 1) * 24 * 60 * 60 * 1000 +7*60*60*1000);
-
+    const selectedDate = new Date(today.getTime() + (activeDay + 1) * 24 * 60 * 60 * 1000 + 7 * 60 * 60 * 1000);
+  
     try {
-      const selectedShift = shifts.find((shift) => shift.time == activeTiming);
       if (selectedShift) {
         // Set the shift ID in localStorage
         localStorage.setItem("departmentId", id);
@@ -162,6 +142,7 @@ function Booking() {
                                 className={`timing ${activeTiming === shift.time ? "active" : ""}`}
                                 href="javascript:void(0);"
                                 onClick={() => handleTimingClick(shift.time)}
+                                style={shift.status === 1 ? { backgroundColor: 'gray', pointerEvents: 'none' } : {}}
                               >
                                 <span><i className="feather-clock"></i> {shift.time}</span>
                               </a>
@@ -189,6 +170,7 @@ function Booking() {
                                 className={`timing ${activeTiming === shift.time ? "active" : ""}`}
                                 href="javascript:void(0);"
                                 onClick={() => handleTimingClick(shift.time)}
+                                style={shift.status === 1 ? { backgroundColor: 'gray', pointerEvents: 'none' } : {}}
                               >
                                 <span><i className="feather-clock"></i> {shift.time}</span>
                               </a>
@@ -212,7 +194,6 @@ function Booking() {
               <button
                 onClick={handleNextClick}
                 className="btn btn-primary prime-btn justify-content-center align-items-center"
-                disabled={isBookingFull}
               >
                 Next <i className="feather-arrow-right-circle"></i>
               </button>
