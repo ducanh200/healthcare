@@ -28,7 +28,7 @@ function Invoice() {
         const patients = patientsResponse.data;
 
         // Fetch the shifts
-        const shiftsResponse = await api.get(url.SHIFT.LIST);
+        const shiftsResponse = await api.get(url.SHIFT.DETAIL);
         const shifts = shiftsResponse.data;
 
         // Fetch the departments
@@ -93,7 +93,6 @@ function Invoice() {
   const combinedList = [
     ...listinvoice.map(item => ({ ...item, type: 'invoice' })),
   ].sort((a, b) => b.id - a.id);
-
   return (
     <div className="content">
       <div className="container" style={{ textAlign: "justify" }}>

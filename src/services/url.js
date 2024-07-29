@@ -13,6 +13,7 @@ const url ={
         GETBYID:"/departments/"
     },
     SHIFT:{
+        DETAIL:"/shifts",
         LIST:"/shifts/available",
         GETBYID:"/shifts/"
     },
