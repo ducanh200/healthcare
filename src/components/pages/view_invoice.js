@@ -100,7 +100,7 @@ function View_invoice() {
                                         </tr>
                                         <tr>
                                             <th scope="row" style={{ width: "30%" }}>Expense</th>
-                                            <td style={{ width: "70%" }}>{listinvoice?.expense}</td>
+                                            <td style={{ width: "70%" }}>${listinvoice?.expense}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row" style={{ width: "30%" }}>Diagnose End</th>
@@ -132,7 +132,7 @@ function View_invoice() {
                                                         <td style={{ width: "10%" }}>{index + 1}</td>
                                                         <td style={{ width: "15%" }}><img style={{ width: "100px", height: "100px" }} src={test.thumbnail} /></td>
                                                         <td style={{ width: "20%" }}>{test.device.name}</td>
-                                                        <td style={{ width: "10%" }}>{test.expense}</td>
+                                                        <td style={{ width: "10%" }}>${test.expense}</td>
                                                         <td style={{ width: "15%" }}>{test.testAt}</td>
                                                     </tr>
                                                 ))

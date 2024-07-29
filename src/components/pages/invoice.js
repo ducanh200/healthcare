@@ -119,8 +119,8 @@ function Invoice() {
                         <tr key={item.id}>
                           <td style={{ width: '10%' }}>{index + 1}</td>
                           <td style={{ width: '20%' }}>{item.date || item.booking.date}</td>
-                          <td style={{ width: '10%' }}>{item.expense || '-'}</td>
-                          <td style={{ width: '30%' }}>{item.diagnoseEnd || '-'}</td>
+                          <td style={{ width: '10%' }}>${item.expense || '-'}</td>
+                          <td style={{ width: '30%' }}><p  style={{width:'500px',textOverflow:'ellipsis',overflow:"hidden",whiteSpace:"nowrap"}}>{item.diagnoseEnd || '-'}</p></td>
                           <td style={{ width: '20%' }}>{item.shiftTime || shifts.find(shift => shift.id === item.shiftId)?.time || 'Unknown'}</td>
                           <td style={{ width: '20%' }}>{item.departmentName || departments.find(department => department.id === item.departmentId)?.name || 'Unknown'}</td>
                           <td style={{ width: '10%' }}>
